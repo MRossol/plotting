@@ -1,4 +1,6 @@
-import itertools
+"""
+Plotting of 3D arrays in 2D plots
+"""
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
