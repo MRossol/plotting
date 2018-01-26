@@ -1,5 +1,5 @@
 from .lines import (COLORS, riffle_lines, get_COLORS,
-                    line_plot, dual_plot, error_plot)
+                    line_plot, error_plot, dual_plot)
 from .dataframes import (pivot_timeseries, box_plot, point_plot, dist_plot,
                          bar_plot, ts_plot)
 

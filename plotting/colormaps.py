@@ -6,62 +6,32 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 import numpy.ma as ma
+from .base import plotting_base
 
 
-def colormaps_base(plot_func, *args, axes=False,
-                   figsize=(6, 5), dpi=100, fontsize=14, font='Arial',
-                   xlabel=None, ylabel=None, xlim=None, ylim=None,
-                   xticks=None, yticks=None, ticksize=(6, 1),
-                   xtick_labels=None, ytick_labels=None, borderwidth=1,
-                   title=None, add_legend=True, filename=None, **kwargs):
-    fig = plt.figure(figsize=figsize, dpi=dpi)
-    axis = fig.add_subplot(111)
+def add_colorbar(axis, cf, ticks, size, padding,
+                 location='right', label=None, lines=None, fontsize=14):
+    divider = make_axes_locatable(axis)
 
-    plot_func(axis, *args, **kwargs)
+    caxis = divider.append_axes(location, size=size,
+                                pad=padding)
 
-    mpl.rcParams['font.sans-serif'] = font
-    mpl.rcParams['pdf.fonttype'] = 42
-    plt.axes().set_aspect('equal')
-
-    if xlim is not None:
-        axis.set_xlim(xlim)
-
-    if ylim is not None:
-        axis.set_ylim(ylim)
-
-    if axes:
-        for ax in ['top', 'bottom', 'left', 'right']:
-            axis.spines[ax].set_linewidth(borderwidth)
-
-        if xlabel is not None:
-            axis.set_xlabel(xlabel, fontsize=fontsize)
-
-        if ylabel is not None:
-            axis.set_ylabel(ylabel, fontsize=fontsize)
-
-        axis.tick_params(axis='both', labelsize=fontsize - 2,
-                         width=ticksize[1], length=ticksize[0])
-
-        if xticks is not None:
-            axis.set_xticks(xticks)
-            if xtick_labels is not None:
-                axis.set_xticklabels(xtick_labels)
-
-        if yticks is not None:
-            axis.set_yticks(yticks)
-            if ytick_labels is not None:
-                axis.set_yticklabels(ytick_labels)
-
+    if location in ['top', 'bottom']:
+        orientation = 'horizontal'
     else:
-        plt.axis('off')
+        orientation = 'vertical'
 
-    fig.tight_layout()
+    cbar = plt.colorbar(cf, ticks=ticks, cax=caxis,
+                        orientation=orientation,
+                        ticklocation=location)
 
-    if filename is not None:
-        plt.savefig(filename, dpi=dpi, transparent=True,
-                    bbox_inches='tight')
+    cbar.ax.tick_params(labelsize=fontsize - 2)
 
-    plt.close()
+    if label is not None:
+        cbar.set_label(label, size=fontsize)
+
+    if lines is not None:
+        cbar.add_lines(lines)
 
 
 def contour_plot(axis, data, **kwargs):
