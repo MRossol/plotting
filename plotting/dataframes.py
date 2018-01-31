@@ -37,19 +37,18 @@ def box_plot(df, **kwargs):
 def dist_plot(df, **kwargs):
     def plot_func(axis, df, **kwargs):
         fit = kwargs.get('fit', None)
-        del kwargs['fit']
         palette = itertools.cycle(sns.color_palette())
         if isinstance(df, pd.DataFrame):
             for label, series in df. iteritems():
                 if fit is not None:
-                    sns.distplot(series, kde=False, fit=fit,
+                    sns.distplot(series, kde=False,
                                  fit_kws={"color": next(palette)},
                                  label=label, **kwargs)
                 else:
                     sns.distplot(series, label=label, **kwargs)
         else:
             if fit is not None:
-                sns.distplot(df, kde=False, fit=fit,
+                sns.distplot(df, kde=False,
                              fit_kws={"color": next(palette)},
                              **kwargs)
             else:
