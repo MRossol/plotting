@@ -6,6 +6,7 @@ def plotting_base(plot_func, *args, despine=True,
                   figsize=(6, 5), dpi=100, fontsize=14,
                   xlabel=None, ylabel=None, xlim=None, ylim=None,
                   xticks=None, yticks=None, ticksize=(6, 1),
+                  xtick_rotation=None, ytick_rotation=None,
                   xtick_labels=None, ytick_labels=None, borderwidth=1,
                   title=None, legend=True, filename=None, **kwargs):
     """
@@ -39,6 +40,10 @@ def plotting_base(plot_func, *args, despine=True,
         ylim.
     ticksize : 'ndarray', default '[8,2]'
         Length and width of ticks.
+    xtick_rotation : 'int'
+        Degree to rotate xtick labels
+    ytick_rotation : 'int'
+        Degree to rotate ytick labels
     xtick_labels : 'list'
         List of custome xticks. Note len(xticks) == len(xtick_labels)
     ytick_labels : 'list'
@@ -89,10 +94,18 @@ def plotting_base(plot_func, *args, despine=True,
         if xtick_labels is not None:
             axis.set_xticklabels(xtick_labels)
 
+    if xtick_rotation is not None:
+        for tick in axis.get_xticklabels():
+            tick.set_rotation(xtick_rotation)
+
     if yticks is not None:
         axis.set_yticks(yticks)
         if ytick_labels is not None:
             axis.set_yticklabels(ytick_labels)
+
+    if ytick_rotation is not None:
+        for tick in axis.get_yticklabels():
+            tick.set_rotation(ytick_rotation)
 
     for ax in ['top', 'bottom', 'left', 'right']:
         axis.spines[ax].set_linewidth(borderwidth)
