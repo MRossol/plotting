@@ -80,6 +80,8 @@ def ts_plot(df, **kwargs):
 
 def df_error_plot(df, error, **kwargs):
     def plot_func(axis, df, error, **kwargs):
+        error.columns = df.columns
+        error.index = df.index
         df.plot(yerr=error, ax=axis, **kwargs)
 
     plotting_base(plot_func, df, error, **kwargs)
