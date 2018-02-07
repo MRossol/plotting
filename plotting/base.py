@@ -8,7 +8,8 @@ def plotting_base(plot_func, *args, despine=True,
                   xticks=None, yticks=None, ticksize=(6, 1),
                   xtick_rotation=None, ytick_rotation=None,
                   xtick_labels=None, ytick_labels=None, borderwidth=1,
-                  title=None, legend=True, filename=None, **kwargs):
+                  title=None, legend=True, filename=None, showplot=True,
+                  **kwargs):
     """
     Parameters
     ----------
@@ -20,13 +21,13 @@ def plotting_base(plot_func, *args, despine=True,
         Despine axis in seaborn
     figsize : 'Tuple', default = '(8,6)'
         Width and height of figure
-    dpi : 'Int', default = '100'
+    dpi : 'int', default = '100'
         DPI resolution of figure.
-    fontsize : 'Int'
+    fontsize : 'int'
         Font size to be used for axes labels, ticks will be 2 points smaller
-    xlabel : 'String'
+    xlabel : 'str'
         Label for x-axis.
-    ylabel : 'String'
+    ylabel : 'str'
         Label for y-axis.
     xlim : 'tuple', len(xlim) == 2
         Upper and lower limits for the x-axis.
@@ -48,14 +49,16 @@ def plotting_base(plot_func, *args, despine=True,
         List of custome xticks. Note len(xticks) == len(xtick_labels)
     ytick_labels : 'list'
         List of custome yticks. Note len(yticks) == len(ytick_labels)
-    boarderwidth : 'Int'
+    boarderwidth : 'int'
         Linewidth of plot frame
     title : 'str'
         Plot title
-    legend : 'Bool'|'list'
+    legend : 'bool'|'list'
         If True, use df labels, or list of legend labels
-    filename : 'String', default = None.
-        Name of file/path to save the figure to.
+    filename : 'str', default = None.
+        Name of file/path to save the figure to
+    showplot : 'bool'
+        Display plot
     **kwargs
         kwargs for plot_func
     """
@@ -122,7 +125,8 @@ def plotting_base(plot_func, *args, despine=True,
     if filename is not None:
         plt.savefig(filename, dpi=dpi, transparent=True,
                     bbox_inches='tight')
-    else:
+
+    if showplot:
         plt.show()
 
     plt.close()
