@@ -2,7 +2,6 @@
 Line plots in matplotlib
 """
 import itertools
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 from .base import plotting_base
@@ -20,19 +19,6 @@ COLORS = {
     "brown": (0.4745, 0.3333, 0.2824),
     "black": (0.0, 0.0, 0.0)
 }
-
-
-def change_tick_style(style):
-    if style == 'classic':
-        mpl.rcParams['xtick.direction'] = 'in'
-        mpl.rcParams['ytick.direction'] = 'in'
-        mpl.rcParams['xtick.top'] = True
-        mpl.rcParams['ytick.right'] = True
-    else:
-        mpl.rcParams['xtick.direction'] = 'out'
-        mpl.rcParams['ytick.direction'] = 'out'
-        mpl.rcParams['xtick.top'] = False
-        mpl.rcParams['ytick.right'] = False
 
 
 def get_COLORS(colors, n=None):
@@ -103,7 +89,7 @@ def get_line_styles(colors=None, linestyles=None, markers=None):
     return colors, linestyles, markers
 
 
-def line_plot(data, **kwargs):
+def line_plot(data, legend=None, **kwargs):
     """
     Parameters
     ----------
@@ -155,10 +141,10 @@ def line_plot(data, **kwargs):
                       mec=mec, mew=mew, color=next(colors),
                       linestyle=next(linestyles), linewidth=linewidth)
 
-    plotting_base(plot_func, data, legend=None, **kwargs)
+    plotting_base(plot_func, data, legend=legend, **kwargs)
 
 
-def error_plot(data, **kwargs):
+def error_plot(data, legend=None, **kwargs):
     """
     Parameters
     ----------
@@ -219,7 +205,7 @@ def error_plot(data, **kwargs):
                           linestyle=next(linestyles), mec=mec, mew=mew,
                           capsize=capsize, capthick=linewidth)
 
-    plotting_base(plot_func, data, legend=None, **kwargs)
+    plotting_base(plot_func, data, legend=legend, **kwargs)
 
 
 def dual_plot(data1, data2,
@@ -229,7 +215,7 @@ def dual_plot(data1, data2,
               colors=None, linestyles='Automatic', linewidth=1,
               markers=None, markersize=5, markeredge=['k', 0.5],
               fontsize=16, borderwidth=1, title=None,
-              add_legend=None, figsize=(6, 5), dpi=100, filename=None):
+              legend=None, figsize=(6, 5), dpi=100, filename=None):
     """
 
     Parameters
@@ -446,9 +432,9 @@ def dual_plot(data1, data2,
         for t2 in axis2.get_yticklabels():
             t2.set_color(axis_colors[1])
 
-    if add_legend:
-        if isinstance(add_legend, list):
-            plt.legend(add_legend, bbox_to_anchor=(1.05, 1), loc=2,
+    if legend:
+        if isinstance(legend, list):
+            plt.legend(legend, bbox_to_anchor=(1.05, 1), loc=2,
                        borderaxespad=0., prop={'size': fontsize - 2})
         else:
             plt.legend(bbox_to_anchor=(1.05, 1), loc=2,

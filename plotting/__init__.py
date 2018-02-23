@@ -10,3 +10,16 @@ sns.set_style("white")
 sns.set_style("ticks")
 mpl.rcParams['font.sans-serif'] = 'Arial'
 mpl.rcParams['pdf.fonttype'] = 42
+
+
+def change_tick_style(style):
+    if style == 'classic':
+        mpl.rcParams['xtick.direction'] = 'in'
+        mpl.rcParams['ytick.direction'] = 'in'
+        mpl.rcParams['xtick.top'] = True
+        mpl.rcParams['ytick.right'] = True
+    else:
+        mpl.rcParams['xtick.direction'] = 'out'
+        mpl.rcParams['ytick.direction'] = 'out'
+        mpl.rcParams['xtick.top'] = False
+        mpl.rcParams['ytick.right'] = False
