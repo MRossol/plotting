@@ -113,7 +113,7 @@ def plotting_base(plot_func, *args, despine=True,
     for ax in ['top', 'bottom', 'left', 'right']:
         axis.spines[ax].set_linewidth(borderwidth)
 
-    if legend is not None:
+    if legend:
         if isinstance(legend, list):
             plt.legend(legend, bbox_to_anchor=(1.05, 1), loc=2,
                        borderaxespad=0., prop={'size': fontsize - 2})
