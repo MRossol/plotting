@@ -3,7 +3,7 @@ import seaborn as sns
 
 
 def plotting_base(plot_func, *args, despine=True,
-                  figsize=(6, 5), dpi=100, fontsize=14,
+                  figsize=(6, 4), dpi=100, fontsize=14,
                   xlabel=None, ylabel=None, xlim=None, ylim=None,
                   xticks=None, yticks=None, ticksize=(6, 1),
                   xtick_rotation=None, ytick_rotation=None,
@@ -64,6 +64,9 @@ def plotting_base(plot_func, *args, despine=True,
     """
     fig = plt.figure(figsize=figsize, dpi=dpi)
     axis = fig.add_subplot(111)
+
+    if legend is False:
+        kwargs['legend'] = legend
 
     plot_func(axis, *args, **kwargs)
 
