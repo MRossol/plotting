@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 import numpy.ma as ma
-from .base import plotting_base
 
 
 def add_colorbar(axis, cf, ticks, size, padding,
