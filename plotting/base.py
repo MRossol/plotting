@@ -19,6 +19,8 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
         Args for plot_func
     despine : 'bool'
         Despine axis in seaborn
+    axes : 'bool'
+        Show axes, default=True
     figsize : 'Tuple', default = '(8,6)'
         Width and height of figure
     dpi : 'int', default = '100'
