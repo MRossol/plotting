@@ -89,12 +89,12 @@ def get_line_styles(colors=None, linestyles=None, markers=None):
     return colors, linestyles, markers
 
 
-def line_plot(data, legend=None, **kwargs):
+def line_plot(*lines, legend=None, **kwargs):
     """
     Parameters
     ----------
-    data : 'ndarray', shape(data[i]) = (n,2)
-        Either a tuple or list of nx2 arrays or a single nx2 array.
+    *lines : 'ndarray', shape(line) = (n,2)
+        each line in lines must be a nx2 array or nx2 list
     colors : 'ndarray'
         Iterable list of colors to plot for each line in 'data'.
         Will be cycled if fewer entries are specified than the number of lines
@@ -117,13 +117,9 @@ def line_plot(data, legend=None, **kwargs):
         in 'data'.
     """
 
-    def plot_func(axis, data,
+    def plot_func(axis, *lines,
                   colors=None, linestyles='Automatic', linewidth=2,
                   markers=None, markersize=5, markeredge=['k', 0.5], **kwargs):
-        if not isinstance(data, (list, tuple)):
-            lines = (data,)
-        else:
-            lines = data
 
         colors, linestyles, markers = get_line_styles(colors=colors,
                                                       linestyles=linestyles,
@@ -136,12 +132,15 @@ def line_plot(data, legend=None, **kwargs):
             mew = None
 
         for line in lines:
+            if not isinstance(line, np.ndarray):
+                line = np.array(line)
+
             axis.plot(line[:, 0], line[:, 1],
                       markersize=markersize, marker=next(markers),
                       mec=mec, mew=mew, color=next(colors),
                       linestyle=next(linestyles), linewidth=linewidth)
 
-    plotting_base(plot_func, data, legend=legend, **kwargs)
+    plotting_base(plot_func, *lines, legend=legend, **kwargs)
 
 
 def error_plot(data, legend=None, **kwargs):
