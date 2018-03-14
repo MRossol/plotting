@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plotting_base(plot_func, *args, despine=True,
+def plotting_base(plot_func, *args, despine=True, axes=True,
                   figsize=(6, 4), dpi=100, fontsize=14,
                   xlabel=None, ylabel=None, xlim=None, ylim=None,
                   xticks=None, yticks=None, ticksize=(6, 1),
@@ -123,6 +123,9 @@ def plotting_base(plot_func, *args, despine=True,
         else:
             plt.legend(bbox_to_anchor=(1.05, 1), loc=2,
                        borderaxespad=0., prop={'size': fontsize - 2})
+
+    if not axes:
+        plt.axis('off')
 
     fig.tight_layout()
     if filename is not None:
