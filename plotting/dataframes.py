@@ -25,6 +25,17 @@ def pivot_timeseries(df, var_name, timezone=None):
     return pd.concat(sns_df)
 
 
+def pivot_df(df, var_name):
+    sns_df = []
+    for name, col in df.iteritems():
+        col = col.to_frame()
+        col.columns = [var_name]
+        col['source'] = name
+        sns_df.append(col)
+
+    return pd.concat(sns_df)
+
+
 def box_plot(df, **kwargs):
     def plot_func(axis, df, **kwargs):
         meanprops = dict(marker='o', markeredgecolor='black',

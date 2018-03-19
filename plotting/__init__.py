@@ -1,7 +1,7 @@
 from .lines import (COLORS, riffle_lines, get_COLORS,
                     line_plot, error_plot, dual_plot)
-from .dataframes import (pivot_timeseries, box_plot, point_plot, dist_plot,
-                         bar_plot, df_line_plot, df_error_plot)
+from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
+                         dist_plot, bar_plot, df_line_plot, df_error_plot)
 
 import matplotlib as mpl
 import seaborn as sns
