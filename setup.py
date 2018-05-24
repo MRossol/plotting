@@ -1,9 +1,10 @@
-from distutils.core import setup
+import setuptools
 
-setup(
+setuptools.setup(
     name='plotting',
     version='0.1.0',
-    packages=['plotting', ],
-    license='Creative Commons Attribution-Noncommercial-Share Alike license',
+    author='Michael Rossol',
+    author_email='mrossol@gmail.com',
     long_description=open('README.txt').read(),
+    packages=setuptools.find_packages(),
 )
