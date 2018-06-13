@@ -8,8 +8,8 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
                   xticks=None, yticks=None, ticksize=(6, 1),
                   xtick_rotation=None, ytick_rotation=None,
                   xtick_labels=None, ytick_labels=None, borderwidth=1,
-                  title=None, legend=True, filename=None, showplot=True,
-                  **kwargs):
+                  title=None, suptitle=None, legend=True, legend_loc=None,
+                  filename=None, showplot=True, **kwargs):
     """
     Parameters
     ----------
@@ -55,8 +55,12 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
         Linewidth of plot frame
     title : 'str'
         Plot title
+    suptitle : 'str'
+        Centered figure title
     legend : 'bool'|'list'
         If True, use df labels, or list of legend labels
+    legend_loc : 'dict'
+        dictionary of legend location kwargs (e.g., loc, bbox_to_anchor, etc.)
     filename : 'str', default = None.
         Name of file/path to save the figure to
     showplot : 'bool'
@@ -74,6 +78,9 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
 
     if despine:
         sns.despine(offset=10, trim=False)
+
+    if suptitle is not None:
+        fig.suptitle(suptitle, fontsize=fontsize + 2)
 
     if title is not None:
         axis.set_title(title, fontsize=fontsize + 2)
@@ -119,12 +126,13 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
         axis.spines[ax].set_linewidth(borderwidth)
 
     if legend:
+        if legend_loc is None:
+            legend_loc = {'bbox_to_anchor': (1.05, 1), 'loc': 2,
+                          "borderaxespad": 0.}
         if isinstance(legend, list):
-            plt.legend(legend, bbox_to_anchor=(1.05, 1), loc=2,
-                       borderaxespad=0., prop={'size': fontsize - 2})
+            plt.legend(legend, prop={'size': fontsize - 2}, **legend_loc)
         else:
-            plt.legend(bbox_to_anchor=(1.05, 1), loc=2,
-                       borderaxespad=0., prop={'size': fontsize - 2})
+            plt.legend(prop={'size': fontsize - 2}, **legend_loc)
 
     if not axes:
         plt.axis('off')
