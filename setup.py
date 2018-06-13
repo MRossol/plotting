@@ -4,7 +4,7 @@ install_requires = ["matplotlib", "seaborn"]
 
 setup(
     name="plotting",
-    version="0.1.0",
+    version="0.0.1",
     author="Michael Rossol",
     author_email="mrossol@gmail.com",
     long_description=open("README.md").read(),
