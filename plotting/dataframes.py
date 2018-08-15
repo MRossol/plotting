@@ -82,6 +82,13 @@ def bar_plot(df, **kwargs):
     plotting_base(plot_func, df, **kwargs)
 
 
+def df_scatter(df, **kwargs):
+    def plot_func(axis, df, **kwargs):
+        df.plot.scatter(ax=axis, **kwargs)
+
+    plotting_base(plot_func, df, **kwargs)
+
+
 def df_line_plot(df, **kwargs):
     def plot_func(axis, df, **kwargs):
         df.plot(ax=axis, **kwargs)
