@@ -8,7 +8,7 @@ import seaborn as sns
 
 sns.set_style("white")
 sns.set_style("ticks")
-mpl.rcParams['font.sans-serif'] = 'Arial'
+mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
 mpl.rcParams['pdf.fonttype'] = 42
 
 
