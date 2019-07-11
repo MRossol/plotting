@@ -129,6 +129,9 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
         if legend_loc is None:
             legend_loc = {'bbox_to_anchor': (1.05, 1), 'loc': 2,
                           "borderaxespad": 0.}
+        elif isinstance(legend_loc, (str, int)):
+            legend_loc = {'loc': legend_loc}
+
         if isinstance(legend, list):
             plt.legend(legend, prop={'size': fontsize - 2}, **legend_loc)
         else:

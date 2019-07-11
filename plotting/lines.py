@@ -131,12 +131,17 @@ def line_plot(*lines, legend=None, **kwargs):
             mec = None
             mew = None
 
+        if not isinstance(markersize, (list, tuple)):
+            markersize = (markersize,)
+
+        markersize = itertools.cycle(markersize)
+
         for line in lines:
             if not isinstance(line, np.ndarray):
                 line = np.array(line)
 
             axis.plot(line[:, 0], line[:, 1],
-                      markersize=markersize, marker=next(markers),
+                      markersize=next(markersize), marker=next(markers),
                       mec=mec, mew=mew, color=next(colors),
                       linestyle=next(linestyles), linewidth=linewidth)
 
