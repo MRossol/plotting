@@ -4,7 +4,8 @@ Line plots in matplotlib
 import itertools
 import matplotlib.pyplot as plt
 import numpy as np
-from .base import plotting_base
+import seaborn as sns
+from plotting.base import plotting_base
 
 COLORS = {
     "red": (0.7176, 0.1098, 0.1098),
@@ -19,6 +20,30 @@ COLORS = {
     "brown": (0.4745, 0.3333, 0.2824),
     "black": (0.0, 0.0, 0.0)
 }
+
+
+def get_colors(color_palette=None):
+    """
+    Parameters
+    ----------
+    color_palette : str| list | NoneType
+        color_palette to use
+
+    Returns
+    -------
+    colors : list
+        List of colors to use
+    """
+    if color_palette is None:
+        colors = COLORS.items()
+    elif isinstance(color_palette, str):
+        colors = sns.color_palette(color_palette)
+    elif isinstance(color_palette, (list, tuple)):
+        colors = color_palette
+    else:
+        raise ValueError("Cannot interprete color palette")
+
+    return itertools.cycle(colors)
 
 
 def get_COLORS(colors, n=None):
@@ -58,19 +83,7 @@ def riffle_lines(*args):
 
 
 def get_line_styles(colors=None, linestyles=None, markers=None):
-    if colors is not None:
-        colors = itertools.cycle(colors)
-    else:
-        colors = itertools.cycle((COLORS["blue"],
-                                  COLORS["green"],
-                                  COLORS["red"],
-                                  COLORS["orange"],
-                                  COLORS["purple"],
-                                  COLORS["grey"],
-                                  COLORS["cyan"],
-                                  COLORS["teal"],
-                                  COLORS["lime"],
-                                  COLORS["brown"]))
+    colors = get_colors(color_palette==colors)
 
     if linestyles is None:
         linestyles = itertools.cycle(('',))
@@ -116,7 +129,6 @@ def line_plot(*lines, legend=None, **kwargs):
         Will be cycled if fewer entries are specified than the number of lines
         in 'data'.
     """
-
     def plot_func(axis, *lines,
                   colors=None, linestyles='Automatic', linewidth=2,
                   markers=None, markersize=5, markeredge=['k', 0.5], **kwargs):
@@ -146,6 +158,24 @@ def line_plot(*lines, legend=None, **kwargs):
                       linestyle=next(linestyles), linewidth=linewidth)
 
     plotting_base(plot_func, *lines, legend=legend, **kwargs)
+
+
+def hist_plot(*arrays, **kwargs):
+    """
+    Parameters
+    ----------
+    arrays : list | tuple
+        Either a tuple or list of nx1 arrays
+    colors : list | tuple | str
+        List of colors or color palette to use.
+    """
+    def plot_func(axis, *arrays, colors=None, **kwargs):
+        colors = get_colors(color_palette=colors)
+
+        for arr in arrays:
+            sns.distplot(arr, color=next(colors), ax=axis, **kwargs)
+
+    plotting_base(plot_func, *arrays, legend=None, **kwargs)
 
 
 def error_plot(data, legend=None, **kwargs):
