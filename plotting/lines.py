@@ -84,7 +84,7 @@ def riffle_lines(*args):
 
 
 def get_line_styles(colors=None, linestyles=None, markers=None):
-    colors = get_colors(color_palette==colors)
+    colors = get_colors(color_palette=colors)
 
     if linestyles is None:
         linestyles = itertools.cycle(('',))
