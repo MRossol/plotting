@@ -132,7 +132,8 @@ def line_plot(*lines, legend=None, **kwargs):
     """
     def plot_func(axis, *lines,
                   colors=None, linestyles='Automatic', linewidth=2,
-                  markers=None, markersize=5, markeredge=['k', 0.5], **kwargs):
+                  markers=None, markersize=5, markeredge=['k', 0.5],
+                  alpha=1.0, **kwargs):
 
         colors, linestyles, markers = get_line_styles(colors=colors,
                                                       linestyles=linestyles,
@@ -149,13 +150,18 @@ def line_plot(*lines, legend=None, **kwargs):
 
         markersize = itertools.cycle(markersize)
 
+        if not isinstance(alpha, (list, tuple)):
+            alpha = (alpha,)
+
+        alpha = itertools.cycle(alpha)
+
         for line in lines:
             if not isinstance(line, np.ndarray):
                 line = np.array(line)
 
             axis.plot(line[:, 0], line[:, 1],
                       markersize=next(markersize), marker=next(markers),
-                      mec=mec, mew=mew, color=next(colors),
+                      mec=mec, mew=mew, color=next(colors), alpha=next(alpha),
                       linestyle=next(linestyles), linewidth=linewidth)
 
     plotting_base(plot_func, *lines, legend=legend, **kwargs)
