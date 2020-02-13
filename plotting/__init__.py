@@ -1,3 +1,7 @@
+"""
+plotting wrapper on matplotlib and seaborn to provide a single functional
+call a la mathematica
+"""
 from .lines import (COLORS, riffle_lines, get_COLORS,
                     line_plot, hist_plot, error_plot, dual_plot)
 from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
@@ -12,7 +16,15 @@ mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
 mpl.rcParams['pdf.fonttype'] = 42
 
 
-def change_tick_style(style):
+def change_tick_style(style='classic'):
+    """
+    Change the matplotlib style between classic and new
+
+    Parameters
+    ----------
+    style : str
+        style type to set up
+    """
     if style == 'classic':
         mpl.rcParams['xtick.direction'] = 'in'
         mpl.rcParams['ytick.direction'] = 'in'

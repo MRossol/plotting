@@ -6,6 +6,21 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 import numpy.ma as ma
+import seaborn as sns
+from plotting.base import plotting_base
+
+
+def matrix_plot(data, **kwargs):
+    """
+    Parameters
+    ----------
+    data : ndarray | pandas.DataFrame
+
+    """
+    def plot_func(axis, data, **kwargs):
+        sns.heatmap(data, ax=axis, **kwargs)
+
+    plotting_base(plot_func, data, legend=None, **kwargs)
 
 
 def add_colorbar(axis, cf, ticks, size, padding,
@@ -33,12 +48,12 @@ def add_colorbar(axis, cf, ticks, size, padding,
         cbar.add_lines(lines)
 
 
-def contour_plot(axis, data, **kwargs):
-    def plot_func(data, figsize, fontsize, zlim=None, major_spacing=None,
+def contour_plot(data, **kwargs):
+    def plot_func(axis, data, figsize, fontsize, zlim=None, major_spacing=None,
                   minor_spacing=None, contour_width=1, contour_color='k',
-                  opacity=1., colorbar_on=True, colorbar_location='right',
+                  opacity=1., colorbar=True, colorbar_location='right',
                   colorbar_label=None, colorbar_lines=True,
-                  colorbar_ticks=None, colormap='jet', **kwargs):
+                  colorbar_ticks=None, colormap='jet'):
         assert len(data) == 3, 'Data must equal (x, y, data)'
 
         x, y, z = data
@@ -112,6 +127,8 @@ def contour_plot(axis, data, **kwargs):
             if colorbar_lines is not None:
                 if contour_color is not None:
                     cbar.add_lines(cl)
+
+    plotting_base(plot_func, data, **kwargs)
 
 
 def colorbar(zlim, ticks=None, lines=None, line_color='k', linewidth=1,

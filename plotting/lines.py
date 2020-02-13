@@ -51,13 +51,15 @@ def get_COLORS(colors, n=None):
     """
     Parameters
     ----------
-    colors : 'list'
+    colors : list
         List of strings of color names
-    n : 'int'
+    n : int
         repeat each color in colors n times
+
     Returns
     -------
-    RGB color codes for plotting functions
+    list
+        RGB color codes for plotting functions
     """
     if n is not None:
         colors = np.asarray([[color, ] * n for color in colors]).flatten()
@@ -74,11 +76,13 @@ def riffle_lines(*args):
     """
     Parameters
     ----------
-    *args : 'Tuple'
+    *args : Tuple
         set of lists to be riffled together
+
     Returns
     -------
-    Flattened list of lists such that entries are riffled
+    list
+        Flattened list of lists such that entries are riffled
     """
     return [item for sublist in zip(*args) for item in sublist]
 
@@ -107,28 +111,8 @@ def line_plot(*lines, legend=None, **kwargs):
     """
     Parameters
     ----------
-    *lines : 'ndarray', shape(line) = (n,2)
+    *lines : ndarray, shape(line) = (n,2)
         each line in lines must be a nx2 array or nx2 list
-    colors : 'ndarray'
-        Iterable list of colors to plot for each line in 'data'.
-        Will be cycled if fewer entries are specified than the number of lines
-        in 'data'.
-    linestyles : 'ndarray'
-        Iterable list of Matplotlib designations for the linestyle for each
-        line in 'data'.
-        Will be cycled if fewer entries are specified than the number of lines
-        in 'data'.
-    linewidth : 'Int'
-        Line width for each line in 'data'.
-    markersize : 'Float'
-        Marker size for each marker in 'data'.
-    markeredge : 'list'
-        [marker edge color, marker edge width]
-    markers : 'ndarray'
-        Iterable list of Matplotlib designations for the marker for each line
-        in 'data'.
-        Will be cycled if fewer entries are specified than the number of lines
-        in 'data'.
     """
     def plot_func(axis, *lines,
                   colors=None, linestyles='Automatic', linewidth=2,
@@ -189,28 +173,8 @@ def error_plot(data, legend=None, **kwargs):
     """
     Parameters
     ----------
-    data : 'ndarray', shape(data[i]) = (n,2)
+    data : ndarray, shape(data[i]) = (n,2)
         Either a tuple or list of nx2 arrays or a single nx2 array.
-    colors : 'ndarray'
-        Iterable list of colors to plot for each line in 'data'.
-        Will be cycled if fewer entries are specified than the number of lines
-        in 'data'.
-    linestyles : 'ndarray'
-        Iterable list of Matplotlib designations for the linestyle for each
-        line in 'data'.
-        Will be cycled if fewer entries are specified than the number of lines
-        in 'data'.
-    linewidth : 'Int'
-        Line width for each line in 'data'.
-    markersize : 'Float'
-        Marker size for each marker in 'data'.
-    markeredge : 'list'
-        [marker edge color, marker edge width]
-    markers : 'ndarray'
-        Iterable list of Matplotlib designations for the marker for each line
-        in 'data'.
-        Will be cycled if fewer entries are specified than the number of lines
-        in 'data'.
     """
 
     def plot_func(axis, data_error,

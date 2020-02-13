@@ -4,7 +4,7 @@ Plotting dataframe data with seaborn and pandas
 import itertools
 import pandas as pd
 import seaborn as sns
-from .base import plotting_base
+from plotting.base import plotting_base
 
 
 def pivot_timeseries(df, var_name, timezone=None):
@@ -54,16 +54,18 @@ def dist_plot(df, **kwargs):
                 if fit is not None:
                     sns.distplot(series, kde=False,
                                  fit_kws={"color": next(palette)},
-                                 label=label, **kwargs)
+                                 label=label, ax=axis,
+                                 **kwargs)
                 else:
-                    sns.distplot(series, label=label, **kwargs)
+                    sns.distplot(series, label=label, ax=axis,
+                                 **kwargs)
         else:
             if fit is not None:
                 sns.distplot(df, kde=False,
                              fit_kws={"color": next(palette)},
-                             **kwargs)
+                             ax=axis, **kwargs)
             else:
-                sns.distplot(df, **kwargs)
+                sns.distplot(df, ax=axis, **kwargs)
 
     plotting_base(plot_func, df, **kwargs)
 
