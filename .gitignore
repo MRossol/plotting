@@ -1,10 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.pytest_cache
 *.py[cod]
 *$py.class
-
-# C extensions
-*.so
 
 # Distribution / packaging
 .Python
@@ -49,6 +47,9 @@ coverage.xml
 # Translations
 *.mo
 *.pot
+
+# Dask stuff:
+dask-worker-space/
 
 # Django stuff:
 *.log
@@ -99,3 +100,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# OS Files
+.DS_Store
+*/.DS_Store
+
+# VSCode
+.vscode
