@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 plotting documentation
-*******************
+**********************
 
 plotting is wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `seaborn <https://seaborn.pydata.org/>`_ that allow for single function calls (a la mathematica) to great high quality figures
 
