@@ -2,6 +2,8 @@ plotting
 ********
 A plotting wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `seaborn <https://seaborn.pydata.org/>`_ to enable single function plotting calls a la mathematica
 
+.. inclusion-intro
+
 Installation
 ==============
 
