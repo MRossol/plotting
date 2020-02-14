@@ -227,13 +227,13 @@ def hist_plot(*arrays, **kwargs):
     plotting_base(plot_func, *arrays, legend=None, **kwargs)
 
 
-def error_plot(error, legend=None, **kwargs):
+def error_plot(data_error, legend=None, **kwargs):
     """
     Line plot with error bars
 
     Parameters
     ----------
-    data : ndarray, shape(data[i]) = (n,2)
+    data_error : ndarray, shape(data[i]) = (n,2)
         Either a tuple or list of nx2 arrays or a single nx2 array.
     legend : list
         Legend values to plot
@@ -263,8 +263,8 @@ def error_plot(error, legend=None, **kwargs):
     def plot_func(axis, data_error, colors=None, linestyles='Automatic',
                   linewidth=2, capsize=6, markers=None, markersize=5,
                   markeredge=['k', 0.5]):
-        assert (isinstance(data_error, (list, tuple)),
-                'Input data needs to be in (data, error) pairs')
+        msg = 'Input data needs to be in (data, error) pairs'
+        assert isinstance(data_error, (list, tuple)), msg
 
         colors, linestyles, markers = get_line_styles(colors=colors,
                                                       linestyles=linestyles,
@@ -293,7 +293,7 @@ def error_plot(error, legend=None, **kwargs):
                           linestyle=next(linestyles), mec=mec, mew=mew,
                           capsize=capsize, capthick=linewidth)
 
-    plotting_base(plot_func, error, legend=legend, **kwargs)
+    plotting_base(plot_func, data_error, legend=legend, **kwargs)
 
 
 def dual_plot(data1, data2,
