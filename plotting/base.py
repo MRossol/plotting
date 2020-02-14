@@ -14,59 +14,61 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
                   title=None, suptitle=None, legend=True, legend_loc=None,
                   filename=None, showplot=True, **kwargs):
     """
+    Base function to handle formatting the figure and axis
+
     Parameters
     ----------
-    plot_func : 'function'
+    plot_func : function
         Plotting function
     * args
         Args for plot_func
-    despine : 'bool'
+    despine : bool
         Despine axis in seaborn
-    axes : 'bool'
+    axes : bool
         Show axes, default=True
-    figsize : 'Tuple', default = '(8,6)'
+    figsize : Tuple
         Width and height of figure
-    dpi : 'int', default = '100'
+    dpi : int
         DPI resolution of figure.
-    fontsize : 'int'
+    fontsize : int
         Font size to be used for axes labels, ticks will be 2 points smaller
-    xlabel : 'str'
+    xlabel : str
         Label for x-axis.
-    ylabel : 'str'
+    ylabel : str
         Label for y-axis.
-    xlim : 'tuple', len(xlim) == 2
+    xlim : tuple, len(xlim) == 2
         Upper and lower limits for the x-axis.
-    ylim : 'tuple', len(ylim) == 2
+    ylim : tuple, len(ylim) == 2
         Upper and lower limits for the y-axis.
-    xticks : 'ndarray'
+    xticks : ndarray
         List of ticks to use on the x-axis. Should be within the bounds set by
         xlim.
-    yticks : 'ndarray'
+    yticks : ndarray
         List of ticks to use on the y-axis. Should be within the bound set by
         ylim.
-    ticksize : 'ndarray', default '[8,2]'
+    ticksize : ndarray, default '[8,2]'
         Length and width of ticks.
-    xtick_rotation : 'int'
+    xtick_rotation : int
         Degree to rotate xtick labels
-    ytick_rotation : 'int'
+    ytick_rotation : int
         Degree to rotate ytick labels
-    xtick_labels : 'list'
+    xtick_labels : list
         List of custome xticks. Note len(xticks) == len(xtick_labels)
-    ytick_labels : 'list'
+    ytick_labels : list
         List of custome yticks. Note len(yticks) == len(ytick_labels)
-    boarderwidth : 'int'
+    boarderwidth : int
         Linewidth of plot frame
-    title : 'str'
+    title : str
         Plot title
-    suptitle : 'str'
+    suptitle : str
         Centered figure title
-    legend : 'bool'|'list'
+    legend : bool|list
         If True, use df labels, or list of legend labels
-    legend_loc : 'dict'
+    legend_loc : dict
         dictionary of legend location kwargs (e.g., loc, bbox_to_anchor, etc.)
-    filename : 'str', default = None.
+    filename : str, default = None.
         Name of file/path to save the figure to
-    showplot : 'bool'
+    showplot : bool
         Display plot
     **kwargs
         kwargs for plot_func

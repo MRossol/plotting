@@ -12,10 +12,17 @@ from plotting.base import plotting_base
 
 def matrix_plot(data, **kwargs):
     """
+    Matrix / heat map plot using seaborn heatmap
+
     Parameters
     ----------
     data : ndarray | pandas.DataFrame
 
+    See Also
+    --------
+    seaborn.heatmap : plotting function
+
+    plotting.base.plotting_base : plotting base
     """
     def plot_func(axis, data, **kwargs):
         sns.heatmap(data, ax=axis, **kwargs)
@@ -25,6 +32,32 @@ def matrix_plot(data, **kwargs):
 
 def add_colorbar(axis, cf, ticks, size, padding,
                  location='right', label=None, lines=None, fontsize=14):
+    """
+    Add a colorbar legend to given axis
+
+    Parameters
+    ----------
+    axis : matplotlib.axis
+        Axis objet to add colorbar to
+    cf : matplotlib.cm.ScalarMappable
+        Contour set or colormap mappable to use for colors
+    ticks : list
+        list of tick values
+    size : tuple
+        colorbar size
+    padding : float
+        how much to pad around the colorbar
+    location : str, optional
+        Location of colorbar, by default 'right'
+    label : str, optional
+        Label for colorbar, by default None
+    lines : list, optional
+        list of lines to add, by default None
+    fontsize : int, optional
+        fontsize for label
+        tick size = fontsize -2
+        by default 14
+    """
     divider = make_axes_locatable(axis)
 
     caxis = divider.append_axes(location, size=size,
@@ -49,6 +82,21 @@ def add_colorbar(axis, cf, ticks, size, padding,
 
 
 def contour_plot(data, **kwargs):
+    """
+    Create a contoured colormap from data shape = (n, 3)
+
+    Parameters
+    ----------
+    data : ndarray
+        n X 3 array of data to plot of form (x, y, c)
+
+    See Also
+    --------
+    matplotlib.pyplot.contour : plotting function
+    matplotlib.pyplot.countourf : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, data, figsize, fontsize, zlim=None, major_spacing=None,
                   minor_spacing=None, contour_width=1, contour_color='k',
                   opacity=1., colorbar=True, colorbar_location='right',
@@ -137,42 +185,40 @@ def colorbar(zlim, ticks=None, lines=None, line_color='k', linewidth=1,
              dpi=100, showfig=True, filename=None):
 
     """
+    Create colorbar
+
     Parameters
     ----------
-    zlim : 'tuple'
+    zlim : tuple
         List or tuple indicating zmin and zmax.
-    tick : 'Int'
+    tick : int
         Number of ticks to label.
-    lines : 'Int'
+    lines : int
         Number of lines to draw on colorbar.
-    line_color : 'String'
+    line_color : str
         Color of lines drawn on colorbar.
-    linewidth : 'Int'
+    linewidth : int
         Line width for each line drawn on colorbar.
-    colormap : 'String'
+    colormap : str
         Color scheme for colorbar.
-    extend : 'String'
+    extend : str
         Direction to extend colors beyond zmin and zmax.
-    ticklocation : 'String'
+    ticklocation : str
         Orientation of colorbar and location of tick marks.
-    fontsize_other : 'Int'
+    fontsize_other : int
         Font size of tick numbers.
-    label : 'String'
+    label : str
         Label for colorbar
-    fontsize_label : 'Int'
+    fontsize_label : int
         Font size of label.
-    figsize : 'Tuple', default = '(8,6)'
+    figsize : tuple
         Width and height of figure
-    dpi : 'Int', default = '300'
+    dpi : int
         DPI resolution of figure.
-    showfig : 'Bool', default = 'True'
+    showfig : bool
         Whether to show figure.
-    filename : 'String', default = None.
+    filename : str
         Name of file/path to save the figure to.
-
-    Returns
-    -------
-    Plot custom colorbar
     """
 
     a_ratio = 20
