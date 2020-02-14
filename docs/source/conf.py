@@ -15,9 +15,7 @@ Documentation config file
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.append(os.path.abspath('../../examples'))
+import sys
 import os
 import sphinx_rtd_theme
 
@@ -30,6 +28,7 @@ author = 'Michael Rossol'
 
 pkg = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 pkg = os.path.dirname(pkg)
+sys.path.append(pkg)
 
 with open(os.path.join(pkg, "plotting", "version.py"), encoding="utf-8") as f:
     v = f.read()
