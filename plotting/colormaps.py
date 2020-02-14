@@ -17,6 +17,11 @@ def matrix_plot(data, **kwargs):
     Parameters
     ----------
     data : ndarray | pandas.DataFrame
+        ndarray of heatmap values or
+        pandas DataFrame of heat map values with tick labels as index
+        and column labels
+    kwargs : dict
+        kwargs for seaborn.heatmap and plotting_base
 
     See Also
     --------
@@ -89,6 +94,36 @@ def contour_plot(data, **kwargs):
     ----------
     data : ndarray
         n X 3 array of data to plot of form (x, y, c)
+    figsize : tuple, optional
+        Figure size, by default (8, 6)
+    fontsize : int, optional
+        Labels font size, by default 14
+    zlim : float, optional
+        z / c limit, by default None
+    major_spacing : float, optional
+        space between major contours, by default None
+    minor_spacing : float, optional
+        space between minor contours, by default None
+    contour_width : int, optional
+        contour line width, by default 1
+    contour_color : str, optional
+        contour line color, by default 'k'
+    opacity : float, optional
+        opacity of colormap, by default 1.
+    colorbar : bool, optional
+        Display color bar, by default True
+    colorbar_location : str, optional
+        Location of colorbar, by default 'right'
+    colorbar_label : str, optional
+        Colorbar label, by default None
+    colorbar_lines : bool, optional
+        Plot lines on colorbar, by default True
+    colorbar_ticks : int, optional
+       Number of colorbar ticks, by default None
+    colormap : str, optional
+        colormap style, by default 'jet'
+    kwargs : dict
+        kwargs for plotting_base
 
     See Also
     --------
@@ -97,12 +132,13 @@ def contour_plot(data, **kwargs):
 
     plotting.base.plotting_base : plotting base
     """
-    def plot_func(axis, data, figsize, fontsize, zlim=None, major_spacing=None,
-                  minor_spacing=None, contour_width=1, contour_color='k',
-                  opacity=1., colorbar=True, colorbar_location='right',
-                  colorbar_label=None, colorbar_lines=True,
-                  colorbar_ticks=None, colormap='jet'):
-        assert len(data) == 3, 'Data must equal (x, y, data)'
+    def plot_func(axis, data, figsize=(8, 6), fontsize=14, zlim=None,
+                  major_spacing=None, minor_spacing=None, contour_width=1,
+                  contour_color='k', opacity=1., colorbar=True,
+                  colorbar_location='right', colorbar_label=None,
+                  colorbar_lines=True, colorbar_ticks=None, colormap='jet'):
+
+        assert len(data) == 3, 'Data must be of shape (x, y, c)'
 
         x, y, z = data
         z_m = ma.masked_invalid(z)

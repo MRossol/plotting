@@ -21,19 +21,24 @@ COLORS = {
     "black": (0.0, 0.0, 0.0),
     "white": (1.0, 1.0, 1.0)
 }
+LINESTYLES = ('-', '--', '-.', ':')
+MARKERS = (u'o', u'v', u'^', u'<', u'>', u'8', u's', u'p', u'*', u'h', u'H',
+           u'D', u'd')
 
 
 def get_colors(color_palette=None):
     """
+    Generate an iterable from the desired color palette
+
     Parameters
     ----------
-    color_palette : str| list | NoneType
+    color_palette : str | list | NoneType
         color_palette to use
 
     Returns
     -------
-    colors : list
-        List of colors to use
+    colors : iterable
+        iterable of colors to use
     """
     if color_palette is None:
         colors = COLORS.items()
@@ -49,6 +54,8 @@ def get_colors(color_palette=None):
 
 def get_COLORS(colors, n=None):
     """
+    Extract the desired colors
+
     Parameters
     ----------
     colors : list
@@ -67,16 +74,13 @@ def get_COLORS(colors, n=None):
     return [COLORS[color] for color in colors]
 
 
-def_linestyles = ('-', '--', '-.', ':')
-def_markers = (u'o', u'v', u'^', u'<', u'>', u'8', u's', u'p', u'*', u'h',
-               u'H', u'D', u'd')
-
-
-def riffle_lines(*args):
+def riffle_lines(*lines):
     """
+    Riffle lines together to plot in alternating order
+
     Parameters
     ----------
-    *args : Tuple
+    *lines : Tuple
         set of lists to be riffled together
 
     Returns
@@ -84,23 +88,44 @@ def riffle_lines(*args):
     list
         Flattened list of lists such that entries are riffled
     """
-    return [item for sublist in zip(*args) for item in sublist]
+    return [item for sublist in zip(*lines) for item in sublist]
 
 
 def get_line_styles(colors=None, linestyles=None, markers=None):
+    """
+    Extract line styles (color, linestyle, markers)
+
+    Parameters
+    ----------
+    colors : list, optional
+        Colors to use, by default None
+    linestyles : list, optional
+        Linestyles to use, by default None
+    markers : list, optional
+        Markers to use, by default None
+
+    Returns
+    -------
+    colors : iterable
+        Colors to iterate through
+    linestyles : iterable
+        Linestyles to iterate through
+    markers : iterable
+        Markers to iterate through
+    """
     colors = get_colors(color_palette=colors)
 
     if linestyles is None:
         linestyles = itertools.cycle(('',))
     elif linestyles == 'Automatic':
-        linestyles = itertools.cycle(def_linestyles)
+        linestyles = itertools.cycle(LINESTYLES)
     else:
         linestyles = itertools.cycle(linestyles)
 
     if markers is None:
         markers = itertools.cycle(('',))
     elif markers == 'Automatic':
-        markers = itertools.cycle(def_markers)
+        markers = itertools.cycle(MARKERS)
     else:
         markers = itertools.cycle(markers)
 
@@ -109,16 +134,41 @@ def get_line_styles(colors=None, linestyles=None, markers=None):
 
 def line_plot(*lines, legend=None, **kwargs):
     """
+    Point / line plot
+
     Parameters
     ----------
-    *lines : ndarray, shape(line) = (n,2)
+    lines : ndarray, shape(line) = (n,2)
         each line in lines must be a nx2 array or nx2 list
+    legend : list
+        Legend values to plot
+    colors : str | list, optional
+        color or list of colors to use for lines, by default None
+    linestyles : str | list, optional
+        Linestyle or list of linestyles to use, by default 'Automatic'
+    linewidth : int, optional
+        width of lines, by default 2
+    markers : str | list, optional
+        Marker or list of markers to use, by default None
+    markersize : int, optional
+        Marker size, by default 5
+    markeredge : list, optional
+        Marker edge style, by default ['k', 0.5]
+    alpha : float | list, optional
+        Opacity of list of opacities for lines, by default 1.0
+    kwargs : dict
+        kwargs for plotting_base
+
+    See Also
+    --------
+    matplotlib.pyplot.plot : plotting function
+
+    plotting.base.plotting_base : plotting base
     """
     def plot_func(axis, *lines,
                   colors=None, linestyles='Automatic', linewidth=2,
                   markers=None, markersize=5, markeredge=['k', 0.5],
-                  alpha=1.0, **kwargs):
-
+                  alpha=1.0):
         colors, linestyles, markers = get_line_styles(colors=colors,
                                                       linestyles=linestyles,
                                                       markers=markers)
@@ -153,12 +203,20 @@ def line_plot(*lines, legend=None, **kwargs):
 
 def hist_plot(*arrays, **kwargs):
     """
+    Histogram plot using seaborn's distplot
+
     Parameters
     ----------
-    arrays : list | tuple
-        Either a tuple or list of nx1 arrays
-    colors : list | tuple | str
-        List of colors or color palette to use.
+    arrays : ndarray
+        nx1 array (or arrays) of data to create histogram from
+    kwargs : dict
+        kwargs for seaborn.distplot or plotting_base
+
+    See Also
+    --------
+    seaborn.distplot : plotting function
+
+    plotting.base.plotting_base : plotting base
     """
     def plot_func(axis, *arrays, colors=None, **kwargs):
         colors = get_colors(color_palette=colors)
@@ -169,19 +227,44 @@ def hist_plot(*arrays, **kwargs):
     plotting_base(plot_func, *arrays, legend=None, **kwargs)
 
 
-def error_plot(data, legend=None, **kwargs):
+def error_plot(error, legend=None, **kwargs):
     """
+    Line plot with error bars
+
     Parameters
     ----------
     data : ndarray, shape(data[i]) = (n,2)
         Either a tuple or list of nx2 arrays or a single nx2 array.
-    """
+    legend : list
+        Legend values to plot
+    colors : str | list, optional
+        color or list of colors to use for lines, by default None
+    linestyles : str | list, optional
+        Linestyle or list of linestyles to use, by default 'Automatic'
+    linewidth : int, optional
+        width of lines, by default 2
+    capsize : int, optional
+        Error bar cap size, by default 6
+    markers : str | list, optional
+        Marker or list of markers to use, by default None
+    markersize : int, optional
+        Marker size, by default 5
+    markeredge : list, optional
+        Marker edge style, by default ['k', 0.5]
+    kwargs : dict
+        kwargs for plotting_base
 
-    def plot_func(axis, data_error,
-                  colors=None, linestyles='Automatic', linewidth=2, capsize=6,
-                  markers=None, markersize=5, markeredge=['k', 0.5], **kwargs):
-        assert isinstance(data_error, (list, tuple)), 'Input data needs to be in \
-    (data, error) pairs'
+    See Also
+    --------
+    matplotlib.pyplot.errorbar : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, data_error, colors=None, linestyles='Automatic',
+                  linewidth=2, capsize=6, markers=None, markersize=5,
+                  markeredge=['k', 0.5]):
+        assert (isinstance(data_error, (list, tuple)),
+                'Input data needs to be in (data, error) pairs')
 
         colors, linestyles, markers = get_line_styles(colors=colors,
                                                       linestyles=linestyles,
@@ -210,7 +293,7 @@ def error_plot(data, legend=None, **kwargs):
                           linestyle=next(linestyles), mec=mec, mew=mew,
                           capsize=capsize, capthick=linewidth)
 
-    plotting_base(plot_func, data, legend=legend, **kwargs)
+    plotting_base(plot_func, error, legend=legend, **kwargs)
 
 
 def dual_plot(data1, data2,
@@ -222,66 +305,67 @@ def dual_plot(data1, data2,
               fontsize=16, borderwidth=1, title=None,
               legend=None, figsize=(6, 5), dpi=100, filename=None):
     """
+    Dual axis plot
 
     Parameters
     ----------
-    data1 : 'ndarray', shape(data2[i]) = (n,2)
+    data1 : ndarray, shape(data2[i]) = (n,2)
         Either a tuple or list of nx2 arrays or a single nx2 array.
-    data2 : 'ndarray', shape(data2[i]) = (n,2)
+    data2 : ndarray, shape(data2[i]) = (n,2)
         Either a tuple or list of nx2 arrays or a single nx2 array.
-    xlabel : 'String'
+    xlabel : str
         Label for x-axis.
-    ylabel : 'String'
+    ylabel : str
         Label for y-axis.
-    xlim : 'tuple', len(xlim) == 2
+    xlim : tuple, len(xlim) = 2
         Upper and lower limits for the x-axis.
-    ylim : 'tuple', len(ylim) == 2
+    ylim : tuple, len(ylim) = 2
         Upper and lower limits for the y-axis.
-    xticks : 'ndarray'
+    xticks : ndarray
         List of ticks to use on the x-axis. Should be within the bounds set by
         xlim.
-    yticks : 'ndarray'
+    yticks : ndarray
         List of ticks to use on the y-axis. Should be within the bound set by
         ylim.
-    ticksize : 'ndarray', default '[8,2]'
+    ticksize : ndarray
         Length and width of ticks.
-    xtick_labels : 'list'
+    xtick_labels : list
         List of custome xticks. Note len(xticks) == len(xtick_labels)
-    ytick_labels : 'list'
+    ytick_labels : list
         List of custome yticks. Note len(yticks) == len(ytick_labels)
-    axis_colors : 'string', 'tuple'
+    axis_colors : str, tuple
         string indicating y-axis colors, tuple of strings indicates color of
         each y-axis
-    colors : 'ndarray'
+    colors : ndarray
         Iterable list of colors to plot for each line in 'data'.
         Will be cycled if fewer entries are specified than the number of lines
         in 'data'.
-    linestyles : 'ndarray'
+    linestyles : ndarray
         Iterable list of Matplotlib designations for the linestyle for each
         line in 'data'. Will be cycled if fewer entries are specified than the
         number of lines in 'data'.
-    linewidth : 'Int'
+    linewidth : int
         Line width for each line in 'data'.
-    markersize : 'Float'
+    markersize : float
         Marker size for each marker in 'data'.
-    markeredge : 'list'
+    markeredge : list
         [marker edge color, marker edge width]
-    markers : 'ndarray'
+    markers : ndarray
         Iterable list of Matplotlib designations for the marker for each line
         in 'data'.
         Will be cycled if fewer entries are specified than the number of lines
         in 'data'.
-    fontsize : 'Int'
+    fontsize : int
         Font size to be used for axes labels.
-    boarderwidth : 'Int'
+    boarderwidth : int
         Linewidth of plot frame
-    add_legend : 'Bool', default = 'False'
+    add_legend : bool
         If 'True' a legend will be added at 'legendlocation'.
-    figsize : 'Tuple', default = '(8,6)'
+    figsize : tuple, default = '(8,6)'
         Width and height of figure
-    dpi : 'Int', default = '300'
+    dpi : int
         DPI resolution of figure.
-    filename : 'String', default = None.
+    filename : str
         Name of file/path to save the figure to.
     """
     if not isinstance(data1, (list, tuple)):
@@ -318,8 +402,8 @@ def dual_plot(data1, data2,
         linestyles1 = itertools.cycle(('',))
         linestyles2 = itertools.cycle(('',))
     elif linestyles == 'Automatic':
-        linestyles1 = itertools.cycle(def_linestyles[::2])
-        linestyles2 = itertools.cycle(def_linestyles[1::2])
+        linestyles1 = itertools.cycle(LINESTYLES[::2])
+        linestyles2 = itertools.cycle(LINESTYLES[1::2])
     else:
         if isinstance(linestyles[0], (list, tuple)):
             linestyles1 = itertools.cycle(linestyles[0])
@@ -332,8 +416,8 @@ def dual_plot(data1, data2,
         markers1 = itertools.cycle(('',))
         markers2 = itertools.cycle(('',))
     elif markers == 'Automatic':
-        markers1 = itertools.cycle(def_markers[::2])
-        markers2 = itertools.cycle(def_markers[1::2])
+        markers1 = itertools.cycle(MARKERS[::2])
+        markers2 = itertools.cycle(MARKERS[1::2])
     else:
         if isinstance(markers[0], (list, tuple)):
             markers1 = itertools.cycle(markers[0])

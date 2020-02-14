@@ -8,6 +8,23 @@ from plotting.base import plotting_base
 
 
 def pivot_timeseries(df, var_name, timezone=None):
+    """
+    Pivot timeseries DataFrame and shift UTC by given timezone offset
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Timeseries DataFrame to be pivoted with year, month, hour columns
+    var_name : str
+        Name for new column describing data
+    timezone : int, optional
+        UTC offset to apply to DatetimeIndex, by default None
+
+    Returns
+    -------
+    pandas.DataFrame
+        Seaborn style long table with source, year, month, hour columns
+    """
     sns_df = []
     for name, col in df.iteritems():
         col = col.to_frame()
@@ -26,6 +43,21 @@ def pivot_timeseries(df, var_name, timezone=None):
 
 
 def pivot_df(df, var_name):
+    """
+    Pivot DataFrame converting columns to source and data to var_name
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Source DataFrame to convert to Seaborn long style
+    var_name : str
+        Column name to use for data in final DataFrame
+
+    Returns
+    -------
+    pandas.DataFrame
+        Seaborn long style DataFrame
+    """
     sns_df = []
     for name, col in df.iteritems():
         col = col.to_frame()
@@ -37,6 +69,22 @@ def pivot_df(df, var_name):
 
 
 def box_plot(df, **kwargs):
+    """
+    Box plot based on seaborns boxplot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Seaborn compliant (long style) DataFrame
+    kwargs : dict
+        kwargs for seaborn.boxplot and plotting_base
+
+    See Also
+    --------
+    seaborn.boxplot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, df, **kwargs):
         meanprops = dict(marker='o', markeredgecolor='black',
                          markerfacecolor="None", markersize=5)
@@ -45,13 +93,30 @@ def box_plot(df, **kwargs):
     plotting_base(plot_func, df, **kwargs)
 
 
-def dist_plot(df, **kwargs):
-    def plot_func(axis, df, **kwargs):
-        fit = kwargs.get('fit', None)
+def dist_plot(df, fit=False, **kwargs):
+    """
+    Distribution plot based on seaborn distplot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Seaborn compliant (long style) DataFrame
+    fit : bool
+        Fit the distribution
+    kwargs : dict
+        kwargs for seaborn.distplot and plotting_base
+
+    See Also
+    --------
+    seaborn.distplot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, df, fit=None, **kwargs):
         palette = itertools.cycle(sns.color_palette())
         if isinstance(df, pd.DataFrame):
             for label, series in df. iteritems():
-                if fit is not None:
+                if fit:
                     sns.distplot(series, kde=False,
                                  fit_kws={"color": next(palette)},
                                  label=label, ax=axis,
@@ -60,17 +125,33 @@ def dist_plot(df, **kwargs):
                     sns.distplot(series, label=label, ax=axis,
                                  **kwargs)
         else:
-            if fit is not None:
+            if fit:
                 sns.distplot(df, kde=False,
                              fit_kws={"color": next(palette)},
                              ax=axis, **kwargs)
             else:
                 sns.distplot(df, ax=axis, **kwargs)
 
-    plotting_base(plot_func, df, **kwargs)
+    plotting_base(plot_func, df, fit=fit, **kwargs)
 
 
 def point_plot(df, **kwargs):
+    """
+    Point / line plot based on seaborn pointplot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Seaborn compliant (long style) DataFrame
+    kwargs : dict
+        kwargs for seaborn.pointplot and plotting_base
+
+    See Also
+    --------
+    seaborn.pointplot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, df, **kwargs):
         sns.pointplot(data=df, ax=axis, **kwargs)
 
@@ -78,6 +159,22 @@ def point_plot(df, **kwargs):
 
 
 def bar_plot(df, **kwargs):
+    """
+    Bar plot based on seaborn's barplot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Seaborn compliant (long style) DataFrame
+    kwargs : dict
+        kwargs for seaborn.barplot and plotting_base
+
+    See Also
+    --------
+    seaborn.barplot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, df, **kwargs):
         sns.barplot(data=df, ax=axis, **kwargs)
 
@@ -85,6 +182,22 @@ def bar_plot(df, **kwargs):
 
 
 def df_scatter(df, **kwargs):
+    """
+    scatter plot based on seaborn's scatter
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Seaborn compliant (long style) DataFrame
+    kwargs : dict
+        kwargs for seaborn.scatter and plotting_base
+
+    See Also
+    --------
+    seaborn.scatter : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, df, **kwargs):
         df.plot.scatter(ax=axis, **kwargs)
 
@@ -92,6 +205,22 @@ def df_scatter(df, **kwargs):
 
 
 def df_line_plot(df, **kwargs):
+    """
+    point / line plot based on pandas plot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame of data to plot
+    kwargs : dict
+        kwargs for pandas.DataFrame.plot and plotting_base
+
+    See Also
+    --------
+    pandas.DataFrame.plot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, df, **kwargs):
         df.plot(ax=axis, **kwargs)
 
@@ -99,6 +228,24 @@ def df_line_plot(df, **kwargs):
 
 
 def df_error_plot(df, error, **kwargs):
+    """
+    point / line plot with error bars based on pandas plot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame of data to plot
+    error : pandas.DataFrame
+        Error values for data values
+    kwargs : dict
+        kwargs for pandas.DataFrame.plot and plotting_base
+
+    See Also
+    --------
+    pandas.DataFrame.plot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
     def plot_func(axis, df, error, **kwargs):
         error.columns = df.columns
         error.index = df.index
