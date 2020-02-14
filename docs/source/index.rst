@@ -6,7 +6,7 @@
 plotting documentation
 *******************
 
-plotting is wrapper on matplotlib.pyplot and seaborn that allow for single function calls (a la mathematica) to great high quality figures
+plotting is wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `seaborn <https://seaborn.pydata.org/>`_ that allow for single function calls (a la mathematica) to great high quality figures
 
 .. include:: ../../README.rst
    :start-after: inclusion-intro

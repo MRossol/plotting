@@ -1,6 +1,6 @@
 plotting
 ********
-A plotting wrapper on matplotlib and seaborn to enable single function plotting calls a la mathematica
+A plotting wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `seaborn <https://seaborn.pydata.org/>`_ to enable single function plotting calls a la mathematica
 
 Installation
 ==============
@@ -9,7 +9,7 @@ Installation
 
     pip install plotting
 
-Developement
+Development
 ============
 
 If you want to contribute to this package:
