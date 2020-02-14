@@ -53,7 +53,7 @@ setup(
     zip_safe=False,
     keywords="rev",
     classifiers=[
-        "Development Status :: Beta",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Modelers",
         "License :: OSI Approved :: BSD License",
         "Natural Language :: English",
