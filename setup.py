@@ -54,7 +54,7 @@ setup(
     keywords="rev",
     classifiers=[
         "Development Status :: 4 - Beta",
-        "Intended Audience :: Modelers",
+        "Intended Audience :: Science/Research",
         "License :: OSI Approved :: BSD License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3.6",
