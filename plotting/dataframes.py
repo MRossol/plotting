@@ -190,6 +190,29 @@ def bar_plot(df, kind='bar', **kwargs):
     plotting_base(plot_func, df, kind=kind, **kwargs)
 
 
+def df_bar_plot(df, **kwargs):
+    """
+    Bar plot based on seaborn's catplot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame to plot
+    kwargs : dict
+        kwargs for pandas.DataFrame.plot
+
+    See Also
+    --------
+    pandas.DataFrame.plot
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, df, **kwargs):
+        df.plot(kind='bar', ax=axis, **kwargs)
+
+    plotting_base(plot_func, df, **kwargs)
+
+
 def stackedbar_plot(df, x, y, stack, **kwargs):
     """
     Bar plot based on seaborn's catplot
@@ -204,8 +227,10 @@ def stackedbar_plot(df, x, y, stack, **kwargs):
         Column to use for y-axis
     stack : str
         Column to stack
+    order : list
+        Stacking order
     kwargs : dict
-        kwargs for seaborn.barplot and plotting_base
+        kwargs for pandas.DataFrame.plot and plotting_base
 
     See Also
     --------
@@ -213,8 +238,11 @@ def stackedbar_plot(df, x, y, stack, **kwargs):
 
     plotting.base.plotting_base : plotting base
     """
-    def plot_func(axis, df, x, y, stack, **kwargs):
+    def plot_func(axis, df, x, y, stack, order=None, **kwargs):
         df = df.pivot(index=x, values=y, columns=stack)
+        if order is not None:
+            df = df[order]
+
         df.plot(kind='bar', stacked=True, ax=axis, **kwargs)
 
     plotting_base(plot_func, df, x, y, stack, **kwargs)
@@ -291,3 +319,26 @@ def df_error_plot(df, error, **kwargs):
         df.plot(yerr=error, ax=axis, **kwargs)
 
     plotting_base(plot_func, df, error, **kwargs)
+
+
+def df_pie_plot(df, **kwargs):
+    """
+    Pie chart using pandas plot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame of data to plot
+    kwargs : dict
+        kwargs for pandas.DataFrame.plot and plotting_base
+
+    See Also
+    --------
+    pandas.DataFrame.plot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, df, **kwargs):
+        df.plot.pie(ax=axis, **kwargs)
+
+    plotting_base(plot_func, df, **kwargs)
