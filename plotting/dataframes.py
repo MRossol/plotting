@@ -158,27 +158,66 @@ def point_plot(df, **kwargs):
     plotting_base(plot_func, df, **kwargs)
 
 
-def bar_plot(df, **kwargs):
+def bar_plot(df, kind='bar', **kwargs):
     """
-    Bar plot based on seaborn's barplot
+    Bar plot based on seaborn's catplot
 
     Parameters
     ----------
     df : pandas.DataFrame
         Seaborn compliant (long style) DataFrame
+    kind : str
+        kind of plot to use "count" or "bar"
     kwargs : dict
         kwargs for seaborn.barplot and plotting_base
 
     See Also
     --------
+    seaborn.catplot : plotting function
     seaborn.barplot : plotting function
+    seaborn.countplot : plotting function
 
     plotting.base.plotting_base : plotting base
     """
-    def plot_func(axis, df, **kwargs):
-        sns.barplot(data=df, ax=axis, **kwargs)
+    def plot_func(axis, df, kind='bar', **kwargs):
+        if kind == 'bar':
+            sns.barplot(data=df, ax=axis, **kwargs)
+        elif kind == 'count':
+            sns.countplot(data=df, ax=axis, **kwargs)
+        else:
+            raise ValueError('kind must be "count" or "bar"')
 
-    plotting_base(plot_func, df, **kwargs)
+    plotting_base(plot_func, df, kind=kind, **kwargs)
+
+
+def stackedbar_plot(df, x, y, stack, **kwargs):
+    """
+    Bar plot based on seaborn's catplot
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Seaborn compliant (long style) DataFrame
+    x : str
+        Column to use for x-axis
+    y : str
+        Column to use for y-axis
+    stack : str
+        Column to stack
+    kwargs : dict
+        kwargs for seaborn.barplot and plotting_base
+
+    See Also
+    --------
+    pandas.DataFrame.plot
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, df, x, y, stack, **kwargs):
+        df = df.pivot(index=x, values=y, columns=stack)
+        df.plot(kind='bar', stacked=True, ax=axis, **kwargs)
+
+    plotting_base(plot_func, df, x, y, stack, **kwargs)
 
 
 def df_scatter(df, **kwargs):
