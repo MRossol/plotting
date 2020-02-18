@@ -2,7 +2,7 @@
 plotting wrapper on matplotlib and seaborn to provide a single functional
 call a la mathematica
 """
-from .lines import (COLORS, riffle_lines, get_COLORS,
+from .lines import (COLORS, LINESTYLES, MARKERS, riffle_lines, get_COLORS,
                     line_plot, hist_plot, error_plot, dual_plot)
 from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
                          dist_plot, bar_plot, df_line_plot, df_error_plot,
