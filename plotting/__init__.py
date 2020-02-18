@@ -7,7 +7,7 @@ from .lines import (COLORS, riffle_lines, get_COLORS,
 from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
                          dist_plot, bar_plot, df_line_plot, df_error_plot,
                          stackedbar_plot, df_bar_plot, df_pie_plot)
-from .colormaps import (colorbar, contour_plot, matrix_plot)
+from .colormaps import (colorbar, contour_plot, heatmap_plot)
 
 import matplotlib as mpl
 import seaborn as sns

@@ -10,9 +10,9 @@ import seaborn as sns
 from plotting.base import plotting_base
 
 
-def matrix_plot(data, **kwargs):
+def heatmap_plot(data, **kwargs):
     """
-    Matrix / heat map plot using seaborn heatmap
+    Heat map plot using seaborn heatmap
 
     Parameters
     ----------
