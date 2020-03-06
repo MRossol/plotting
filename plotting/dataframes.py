@@ -2,6 +2,7 @@
 Plotting dataframe data with seaborn and pandas
 """
 import itertools
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from plotting.base import plotting_base
@@ -234,7 +235,7 @@ def stackedbar_plot(df, x, y, stack, **kwargs):
 
     See Also
     --------
-    pandas.DataFrame.plot
+    pandas.DataFrame.plot : plotting function
 
     plotting.base.plotting_base : plotting base
     """
@@ -248,27 +249,31 @@ def stackedbar_plot(df, x, y, stack, **kwargs):
     plotting_base(plot_func, df, x, y, stack, **kwargs)
 
 
-def df_scatter(df, **kwargs):
+def df_scatter(df, colorbar=False, **kwargs):
     """
-    scatter plot based on seaborn's scatter
+    scatter plot based on pandas.plot.scatter
 
     Parameters
     ----------
     df : pandas.DataFrame
         Seaborn compliant (long style) DataFrame
+    colorbar : bool, optional
+        Flag to add colorbar, by default False
     kwargs : dict
-        kwargs for seaborn.scatter and plotting_base
+        kwargs for pandas.DataFrame.plot.scatter and plotting_base
 
     See Also
     --------
-    seaborn.scatter : plotting function
+    pandas.DataFrame.plot.scatter : plotting function
 
     plotting.base.plotting_base : plotting base
     """
-    def plot_func(axis, df, **kwargs):
-        df.plot.scatter(ax=axis, **kwargs)
+    def plot_func(axis, df, colorbar=False, **kwargs):
+        c = df.plot.scatter(ax=axis, **kwargs)
+        if colorbar:
+            plt.colorbar(c)
 
-    plotting_base(plot_func, df, **kwargs)
+    plotting_base(plot_func, df, colorbar=colorbar, **kwargs)
 
 
 def df_line_plot(df, **kwargs):

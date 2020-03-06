@@ -201,32 +201,6 @@ def line_plot(*lines, legend=None, **kwargs):
     plotting_base(plot_func, *lines, legend=legend, **kwargs)
 
 
-def hist_plot(*arrays, **kwargs):
-    """
-    Histogram plot using seaborn's distplot
-
-    Parameters
-    ----------
-    arrays : ndarray
-        nx1 array (or arrays) of data to create histogram from
-    kwargs : dict
-        kwargs for seaborn.distplot or plotting_base
-
-    See Also
-    --------
-    seaborn.distplot : plotting function
-
-    plotting.base.plotting_base : plotting base
-    """
-    def plot_func(axis, *arrays, colors=None, **kwargs):
-        colors = get_colors(color_palette=colors)
-
-        for arr in arrays:
-            sns.distplot(arr, color=next(colors), ax=axis, **kwargs)
-
-    plotting_base(plot_func, *arrays, legend=None, **kwargs)
-
-
 def error_plot(data_error, legend=None, **kwargs):
     """
     Line plot with error bars
@@ -537,3 +511,88 @@ def dual_plot(data1, data2,
         plt.show()
 
     plt.close()
+
+
+def hist_plot(*arrays, colors=None, **kwargs):
+    """
+    Histogram plot using matplotlib.pyplot.hist
+
+    Parameters
+    ----------
+    arrays : ndarray
+        nx1 array (or arrays) of data to create histogram from
+    colors : list | str
+        Color palette or list of colors to use
+    kwargs : dict
+        kwargs for matplotlib.pyplot.hist or plotting_base
+
+    See Also
+    --------
+    matplotlib.pyplot.hist : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, *arrays, colors=None, **kwargs):
+        colors = get_colors(color_palette=colors)
+
+        for arr in arrays:
+            axis.hist(arr, color=next(colors), **kwargs)
+
+    plotting_base(plot_func, *arrays, colors=colors, legend=None, **kwargs)
+
+
+def sns_hist_plot(*arrays, colors=None, **kwargs):
+    """
+    Histogram plot using seaborn's distplot
+
+    Parameters
+    ----------
+    arrays : ndarray
+        nx1 array (or arrays) of data to create histogram from
+    colors : list | str
+        Color palette or list of colors to use
+    kwargs : dict
+        kwargs for seaborn.distplot or plotting_base
+
+    See Also
+    --------
+    seaborn.distplot : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, *arrays, colors=None, **kwargs):
+        colors = get_colors(color_palette=colors)
+
+        for arr in arrays:
+            sns.distplot(arr, color=next(colors), ax=axis, **kwargs)
+
+    plotting_base(plot_func, *arrays, colors=colors, legend=None, **kwargs)
+
+
+def scatter_plot(x, y, colorbar=False, **kwargs):
+    """
+    scatter plot based on matplotlib.pyplot.scatter
+
+    Parameters
+    ----------
+    x : ndarray
+        vector of x values
+    y : ndarray
+        vector of y values
+    colorbar : bool, optional
+        Flag to add colorbar, by default False
+    kwargs : dict
+        kwargs for matplotlib.pyplot.scatter and plotting_base
+
+    See Also
+    --------
+    matplotlib.pyplot.scatter : plotting function
+
+    plotting.base.plotting_base : plotting base
+    """
+    def plot_func(axis, x, y, colorbar=False, **kwargs):
+        cbar = axis.scatter(x, y, **kwargs)
+        if colorbar:
+            plt.colorbar(cbar)
+
+    plotting_base(plot_func, x, y, colorbar=colorbar, **kwargs)
