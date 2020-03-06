@@ -192,7 +192,7 @@ def bar_plot(df, kind='bar', **kwargs):
 
 def df_bar_plot(df, **kwargs):
     """
-    Bar plot based on seaborn's catplot
+    Bar plot based on pandas bar plot
 
     Parameters
     ----------
