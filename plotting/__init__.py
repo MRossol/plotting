@@ -4,7 +4,7 @@ call a la mathematica
 """
 from .points import (COLORS, LINESTYLES, MARKERS, riffle_lines, get_COLORS,
                      line_plot, error_plot, dual_plot, sns_hist_plot,
-                     scatter_plot)
+                     hist_plot, scatter_plot)
 from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
                          dist_plot, bar_plot, df_line_plot, df_error_plot,
                          stackedbar_plot, df_bar_plot, df_pie_plot)
