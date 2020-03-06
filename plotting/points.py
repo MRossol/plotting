@@ -41,7 +41,7 @@ def get_colors(color_palette=None):
         iterable of colors to use
     """
     if color_palette is None:
-        colors = COLORS.items()
+        colors = COLORS.values()
     elif isinstance(color_palette, str):
         colors = sns.color_palette(color_palette)
     elif isinstance(color_palette, (list, tuple)):
@@ -536,6 +536,7 @@ def hist_plot(*arrays, colors=None, **kwargs):
         colors = get_colors(color_palette=colors)
 
         for arr in arrays:
+            print(next(colors))
             axis.hist(arr, color=next(colors), **kwargs)
 
     plotting_base(plot_func, *arrays, colors=colors, legend=None, **kwargs)
