@@ -536,7 +536,6 @@ def hist_plot(*arrays, colors=None, **kwargs):
         colors = get_colors(color_palette=colors)
 
         for arr in arrays:
-            print(next(colors))
             axis.hist(arr, color=next(colors), **kwargs)
 
     plotting_base(plot_func, *arrays, colors=colors, legend=None, **kwargs)
