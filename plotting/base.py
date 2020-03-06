@@ -10,7 +10,8 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
                   xlabel=None, ylabel=None, xlim=None, ylim=None,
                   xticks=None, yticks=None, ticksize=(6, 1),
                   xtick_rotation=None, ytick_rotation=None,
-                  xtick_labels=None, ytick_labels=None, borderwidth=1,
+                  xtick_labels=None, ytick_labels=None,
+                  xscale=None, yscale=None, borderwidth=1,
                   title=None, suptitle=None, legend=True, legend_loc=None,
                   filename=None, showplot=True, **kwargs):
     """
@@ -56,6 +57,12 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
         List of custome xticks. Note len(xticks) == len(xtick_labels)
     ytick_labels : list
         List of custome yticks. Note len(yticks) == len(ytick_labels)
+    xscale : str
+        The scale for the x-axis to use
+        {"linear", "log", "symlog", "logit", ...}
+    yscale : str
+        The scale for the x-axis to use
+        {"linear", "log", "symlog", "logit", ...}
     boarderwidth : int
         Linewidth of plot frame
     title : str
@@ -126,6 +133,12 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
     if ytick_rotation is not None:
         for tick in axis.get_yticklabels():
             tick.set_rotation(ytick_rotation)
+
+    if xscale is not None:
+        axis.set_xscale(xscale)
+
+    if yscale is not None:
+        axis.set_yscale(yscale)
 
     for ax in ['top', 'bottom', 'left', 'right']:
         axis.spines[ax].set_linewidth(borderwidth)
