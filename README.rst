@@ -1,5 +1,11 @@
 plotting
 ********
+.. image:: https://badge.fury.io/py/plotting.svg
+    :target: https://badge.fury.io/py/plotting
+
+.. image:: https://github.com/mrossol/plotting/workflows/github%20pages/badge.svg
+    :target: https://mrossol.github.io/plotting/
+
 A plotting wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `seaborn <https://seaborn.pydata.org/>`_ to enable single function plotting calls a la mathematica
 
 .. inclusion-intro
