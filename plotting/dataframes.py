@@ -2,7 +2,6 @@
 Plotting dataframe data with seaborn and pandas
 """
 import itertools
-import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from plotting.base import plotting_base
@@ -249,7 +248,7 @@ def stackedbar_plot(df, x, y, stack, **kwargs):
     plotting_base(plot_func, df, x, y, stack, **kwargs)
 
 
-def df_scatter(df, colorbar=False, **kwargs):
+def df_scatter(df, **kwargs):
     """
     scatter plot based on pandas.plot.scatter
 
@@ -257,8 +256,6 @@ def df_scatter(df, colorbar=False, **kwargs):
     ----------
     df : pandas.DataFrame
         Seaborn compliant (long style) DataFrame
-    colorbar : bool, optional
-        Flag to add colorbar, by default False
     kwargs : dict
         kwargs for pandas.DataFrame.plot.scatter and plotting_base
 
@@ -268,12 +265,10 @@ def df_scatter(df, colorbar=False, **kwargs):
 
     plotting.base.plotting_base : plotting base
     """
-    def plot_func(axis, df, colorbar=False, **kwargs):
-        c = df.plot.scatter(ax=axis, **kwargs)
-        if colorbar:
-            plt.colorbar(c)
+    def plot_func(axis, df, **kwargs):
+        df.plot.scatter(ax=axis, **kwargs)
 
-    plotting_base(plot_func, df, colorbar=colorbar, **kwargs)
+    plotting_base(plot_func, df, **kwargs)
 
 
 def df_line_plot(df, **kwargs):

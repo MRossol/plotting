@@ -38,7 +38,7 @@ class PostDevelopCommand(develop):
         develop.run(self)
 
 
-install_requires = ["matplotlib", "seaborn"]
+install_requires = ["matplotlib", "seaborn", "pandas"]
 
 setup(
     name="plotting",
