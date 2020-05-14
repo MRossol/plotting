@@ -2,13 +2,15 @@
 plotting wrapper on matplotlib and seaborn to provide a single functional
 call a la mathematica
 """
-from .points import (COLORS, LINESTYLES, MARKERS, riffle_lines, get_COLORS,
-                     line_plot, error_plot, dual_plot, sns_hist_plot,
-                     hist_plot, scatter_plot)
-from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
-                         dist_plot, bar_plot, df_line_plot, df_error_plot,
-                         stackedbar_plot, df_bar_plot, df_pie_plot)
+from .base import plotting_base
 from .colormaps import (colorbar, contour_plot, heatmap_plot)
+from .dataframes import (pivot_timeseries, pivot_df, box_plot, point_plot,
+                         dist_plot, bar_plot, df_scatter, df_line_plot,
+                         df_error_plot, stackedbar_plot, df_bar_plot,
+                         df_pie_plot)
+from .points import (COLORS, LINESTYLES, MARKERS, riffle_lines, get_colors,
+                     get_COLORS, get_line_styles, line_plot, error_plot,
+                     dual_plot, sns_hist_plot, hist_plot, scatter_plot)
 
 import matplotlib as mpl
 import seaborn as sns
