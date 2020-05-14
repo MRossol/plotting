@@ -100,7 +100,7 @@ def dist_plot(df, fit=False, **kwargs):
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    df : pandas.DataFrame | pandas.Series
         Seaborn compliant (long style) DataFrame
     fit : bool
         Fit the distribution
