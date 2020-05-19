@@ -17,9 +17,6 @@ plotting
 .. image:: https://anaconda.org/mrossol/plotting/badges/platforms.svg
     :target: https://anaconda.org/mrossol/plotting
 
-.. image:: https://anaconda.org/mrossol/plotting/badges/downloads.svg
-    :target: https://anaconda.org/mrossol/plotting
-
 .. image:: https://anaconda.org/mrossol/plotting/badges/license.svg
     :target: https://anaconda.org/mrossol/plotting
 
