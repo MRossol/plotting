@@ -13,9 +13,8 @@ A plotting wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `sea
 Installation
 ==============
 
-.. code-block:: bash
-
-    pip install plotting
+    1) ``pip install plotting`` or
+    2) ``conda install plotting --channel=mrossol``
 
 Development
 ============
