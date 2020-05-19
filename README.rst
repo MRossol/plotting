@@ -1,10 +1,27 @@
+********
 plotting
 ********
-.. image:: https://badge.fury.io/py/plotting.svg
-    :target: https://badge.fury.io/py/plotting
 
 .. image:: https://github.com/mrossol/plotting/workflows/Documentation/badge.svg
     :target: https://mrossol.github.io/plotting/
+
+.. image:: https://img.shields.io/pypi/pyversions/plotting.svg
+    :target: https://pypi.org/project/plotting/
+
+.. image:: https://badge.fury.io/py/plotting.svg
+    :target: https://badge.fury.io/py/plotting
+
+.. image:: https://anaconda.org/mrossol/plotting/badges/version.svg
+    :target: https://anaconda.org/mrossol/plotting
+
+.. image:: https://anaconda.org/mrossol/plotting/badges/platforms.svg
+    :target: https://anaconda.org/mrossol/plotting
+
+.. image:: https://anaconda.org/mrossol/plotting/badges/downloads.svg
+    :target: https://anaconda.org/mrossol/plotting
+
+.. image:: https://anaconda.org/mrossol/plotting/badges/license.svg
+    :target: https://anaconda.org/mrossol/plotting
 
 A plotting wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `seaborn <https://seaborn.pydata.org/>`_ to enable single function plotting calls a la mathematica
 
