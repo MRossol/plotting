@@ -1,0 +1,29 @@
+package:
+    name: plotting
+    version: {{ environ.get('GIT_DESCRIBE_TAG','').replace('v', '', 1) }}
+
+build:
+  number: 0
+
+source:
+    git_url: ../
+
+requirements:
+  build:
+    - python
+    - pip
+    - pandas
+    - matplotlib
+    - seaborn
+  run:
+    - python
+    - pandas
+    - matplotlib
+    - seaborn
+
+about:
+  home: "https://github.com/mrossol/plotting"
+  license: BSD 3-Clause
+  summary: "Simplified plotting functions base on Matplotlib and Seaborn"
+  doc_url: "https://mrossol.github.io/plotting/"
+  dev_url: "https://github.com/mrossol/plotting"
