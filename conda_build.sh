@@ -2,6 +2,8 @@
 
 set -e
 
+PKG_NAME=plotting
+
 ARRAY=( 3.6 3.7 3.8 )
 
 export CONDA_BLD_PATH=~/conda-bld
@@ -13,7 +15,7 @@ done
 
 # convert package to other platforms
 platforms=( osx-64 linux-64 win-64 )
-find $CONDA_BLD_PATH/ -name *.tar.bz2 | while read file
+find $CONDA_BLD_PATH/ -name $PKG_NAME*.tar.bz2 | while read file
 do
     echo $file
     #conda convert --platform all $file  -o $HOME/conda-bld/
@@ -24,11 +26,11 @@ do
 done
 
 # upload packages to conda
-find $CONDA_BLD_PATH/ -name *.tar.bz2 | while read file
+find $CONDA_BLD_PATH/ -name $PKG_NAME*.tar.bz2 | while read file
 do
     echo $file
     anaconda upload -u mrossol $file
 done
 
 echo "Building and uploading conda package done!"
-conda build purge
+rm -rf $CONDA_BLD_PATH/*

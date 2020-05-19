@@ -12,12 +12,8 @@ requirements:
   build:
     - python
     - pip
-    - pandas
-    - matplotlib
-    - seaborn
   run:
     - python {{ python }}
-    - {{ pin_compatible('numpy') }}
     - pandas
     - matplotlib
     - seaborn
