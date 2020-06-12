@@ -59,7 +59,6 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
-    'sphinx_click.ext',
 ]
 
 intersphinx_mapping = {'python': ('http://docs.python.org/3.5', None)}
