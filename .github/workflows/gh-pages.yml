@@ -26,7 +26,7 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ghpages }}
+          personal_token: ${{ secrets.ghpages }}
           public_dir: docs/_build
           force_orphan: true
           full_commit_message: ${{ github.event.head_commit.message }}
