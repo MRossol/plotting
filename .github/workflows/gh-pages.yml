@@ -27,7 +27,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # deploy_key: ${{ secrets.GHPAGES }}
           publish_dir: ./docs/_build/html
           force_orphan: true
           full_commit_message: ${{ github.event.head_commit.message }}
