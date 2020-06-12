@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: select python version
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.7'
       - name: install dependencies
@@ -27,6 +27,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.1
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          public_dir: docs/_build/html
+          public_dir: ./docs/_build/html
           force_orphan: true
           full_commit_message: ${{ github.event.head_commit.message }}
