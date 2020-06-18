@@ -25,7 +25,7 @@ Installation
 ==============
 
     1) ``pip install plotting`` or
-    2) ``conda install plotting --channel=mrossol``
+    2) ``conda install plotting --channel=nrel``
 
 Development
 ============
