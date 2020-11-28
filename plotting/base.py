@@ -12,8 +12,8 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
                   xtick_rotation=None, ytick_rotation=None,
                   xtick_labels=None, ytick_labels=None,
                   xscale=None, yscale=None, borderwidth=1,
-                  title=None, suptitle=None, legend=True, legend_loc=None,
-                  filename=None, showplot=True, **kwargs):
+                  title=None, suptitle=None, plot_legend=True,
+                  legend_loc=None, filename=None, showplot=True, **kwargs):
     """
     Base function to handle formatting the figure and axis
 
@@ -69,7 +69,7 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
         Plot title
     suptitle : str
         Centered figure title
-    legend : bool|list
+    plot_legend : bool|list
         If True, use df labels, or list of legend labels
     legend_loc : dict
         dictionary of legend location kwargs (e.g., loc, bbox_to_anchor, etc.)
@@ -83,8 +83,8 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
     fig = plt.figure(figsize=figsize, dpi=dpi)
     axis = fig.add_subplot(111)
 
-    if legend is False:
-        kwargs['legend'] = legend
+    if plot_legend is False:
+        kwargs['legend'] = False
 
     plot_func(axis, *args, **kwargs)
 
@@ -143,15 +143,15 @@ def plotting_base(plot_func, *args, despine=True, axes=True,
     for ax in ['top', 'bottom', 'left', 'right']:
         axis.spines[ax].set_linewidth(borderwidth)
 
-    if legend:
+    if plot_legend:
         if legend_loc is None:
             legend_loc = {'bbox_to_anchor': (1.05, 1), 'loc': 2,
                           "borderaxespad": 0.}
         elif isinstance(legend_loc, (str, int)):
             legend_loc = {'loc': legend_loc}
 
-        if isinstance(legend, list):
-            plt.legend(legend, prop={'size': fontsize - 2}, **legend_loc)
+        if isinstance(plot_legend, list):
+            plt.legend(plot_legend, prop={'size': fontsize - 2}, **legend_loc)
         else:
             plt.legend(prop={'size': fontsize - 2}, **legend_loc)
 
