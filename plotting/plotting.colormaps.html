@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>plotting.colormaps module &mdash; plotting 0.0.7 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotting.dataframes module" href="plotting.dataframes.html" />
+    <link rel="prev" title="plotting.base module" href="plotting.base.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> plotting
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../misc/misc.html">Installation and Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/installation.html#development">Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">plotting</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="plotting.html">plotting package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="plotting.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="plotting.base.html">plotting.base module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">plotting.colormaps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotting.dataframes.html">plotting.dataframes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotting.lines.html">plotting.lines module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotting.version.html">plotting.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">plotting</a> &raquo;</li>
+        
+          <li><a href="plotting.html">plotting package</a> &raquo;</li>
+        
+      <li>plotting.colormaps module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/mrossol/plotting/blob/master/docs/source/plotting/plotting.colormaps.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-plotting.colormaps">
+<span id="plotting-colormaps-module"></span><h1>plotting.colormaps module<a class="headerlink" href="#module-plotting.colormaps" title="Permalink to this headline">¶</a></h1>
+<p>Plotting of 3D arrays in 2D plots</p>
+<dl class="py function">
+<dt id="plotting.colormaps.heatmap_plot">
+<code class="sig-prename descclassname">plotting.colormaps.</code><code class="sig-name descname">heatmap_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/colormaps.html#heatmap_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.colormaps.heatmap_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat map plot using seaborn heatmap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray | pandas.DataFrame</em>) – ndarray of heatmap values or
+pandas DataFrame of heat map values with tick labels as index
+and column labels</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for seaborn.heatmap and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.heatmap</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.colormaps.add_colorbar">
+<code class="sig-prename descclassname">plotting.colormaps.</code><code class="sig-name descname">add_colorbar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axis</span></em>, <em class="sig-param"><span class="n">cf</span></em>, <em class="sig-param"><span class="n">ticks</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">padding</span></em>, <em class="sig-param"><span class="n">location</span><span class="o">=</span><span class="default_value">'right'</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fontsize</span><span class="o">=</span><span class="default_value">14</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/colormaps.html#add_colorbar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.colormaps.add_colorbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a colorbar legend to given axis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>matplotlib.axis</em>) – Axis objet to add colorbar to</p></li>
+<li><p><strong>cf</strong> (<em>matplotlib.cm.ScalarMappable</em>) – Contour set or colormap mappable to use for colors</p></li>
+<li><p><strong>ticks</strong> (<em>list</em>) – list of tick values</p></li>
+<li><p><strong>size</strong> (<em>tuple</em>) – colorbar size</p></li>
+<li><p><strong>padding</strong> (<em>float</em>) – how much to pad around the colorbar</p></li>
+<li><p><strong>location</strong> (<em>str, optional</em>) – Location of colorbar, by default ‘right’</p></li>
+<li><p><strong>label</strong> (<em>str, optional</em>) – Label for colorbar, by default None</p></li>
+<li><p><strong>lines</strong> (<em>list, optional</em>) – list of lines to add, by default None</p></li>
+<li><p><strong>fontsize</strong> (<em>int, optional</em>) – fontsize for label
+tick size = fontsize -2
+by default 14</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.colormaps.contour_plot">
+<code class="sig-prename descclassname">plotting.colormaps.</code><code class="sig-name descname">contour_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/colormaps.html#contour_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.colormaps.contour_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a contoured colormap from data shape = (n, 3)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray</em>) – n X 3 array of data to plot of form (x, y, c)</p></li>
+<li><p><strong>figsize</strong> (<em>tuple, optional</em>) – Figure size, by default (8, 6)</p></li>
+<li><p><strong>fontsize</strong> (<em>int, optional</em>) – Labels font size, by default 14</p></li>
+<li><p><strong>zlim</strong> (<em>float, optional</em>) – z / c limit, by default None</p></li>
+<li><p><strong>major_spacing</strong> (<em>float, optional</em>) – space between major contours, by default None</p></li>
+<li><p><strong>minor_spacing</strong> (<em>float, optional</em>) – space between minor contours, by default None</p></li>
+<li><p><strong>contour_width</strong> (<em>int, optional</em>) – contour line width, by default 1</p></li>
+<li><p><strong>contour_color</strong> (<em>str, optional</em>) – contour line color, by default ‘k’</p></li>
+<li><p><strong>opacity</strong> (<em>float, optional</em>) – opacity of colormap, by default 1.</p></li>
+<li><p><strong>colorbar</strong> (<em>bool, optional</em>) – Display color bar, by default True</p></li>
+<li><p><strong>colorbar_location</strong> (<em>str, optional</em>) – Location of colorbar, by default ‘right’</p></li>
+<li><p><strong>colorbar_label</strong> (<em>str, optional</em>) – Colorbar label, by default None</p></li>
+<li><p><strong>colorbar_lines</strong> (<em>bool, optional</em>) – Plot lines on colorbar, by default True</p></li>
+<li><p><strong>colorbar_ticks</strong> (<em>int, optional</em>) – Number of colorbar ticks, by default None</p></li>
+<li><p><strong>colormap</strong> (<em>str, optional</em>) – colormap style, by default ‘jet’</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.contour</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.countourf</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.colormaps.colorbar">
+<code class="sig-prename descclassname">plotting.colormaps.</code><code class="sig-name descname">colorbar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zlim</span></em>, <em class="sig-param"><span class="n">ticks</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">line_color</span><span class="o">=</span><span class="default_value">'k'</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">colormap</span><span class="o">=</span><span class="default_value">'jet'</span></em>, <em class="sig-param"><span class="n">extend</span><span class="o">=</span><span class="default_value">'neither'</span></em>, <em class="sig-param"><span class="n">ticklocation</span><span class="o">=</span><span class="default_value">'right'</span></em>, <em class="sig-param"><span class="n">fontsize_other</span><span class="o">=</span><span class="default_value">18</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fontsize_label</span><span class="o">=</span><span class="default_value">21</span></em>, <em class="sig-param"><span class="n">figsize</span><span class="o">=</span><span class="default_value">6</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">showfig</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/colormaps.html#colorbar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.colormaps.colorbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create colorbar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zlim</strong> (<em>tuple</em>) – List or tuple indicating zmin and zmax.</p></li>
+<li><p><strong>tick</strong> (<em>int</em>) – Number of ticks to label.</p></li>
+<li><p><strong>lines</strong> (<em>int</em>) – Number of lines to draw on colorbar.</p></li>
+<li><p><strong>line_color</strong> (<em>str</em>) – Color of lines drawn on colorbar.</p></li>
+<li><p><strong>linewidth</strong> (<em>int</em>) – Line width for each line drawn on colorbar.</p></li>
+<li><p><strong>colormap</strong> (<em>str</em>) – Color scheme for colorbar.</p></li>
+<li><p><strong>extend</strong> (<em>str</em>) – Direction to extend colors beyond zmin and zmax.</p></li>
+<li><p><strong>ticklocation</strong> (<em>str</em>) – Orientation of colorbar and location of tick marks.</p></li>
+<li><p><strong>fontsize_other</strong> (<em>int</em>) – Font size of tick numbers.</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – Label for colorbar</p></li>
+<li><p><strong>fontsize_label</strong> (<em>int</em>) – Font size of label.</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – Width and height of figure</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – DPI resolution of figure.</p></li>
+<li><p><strong>showfig</strong> (<em>bool</em>) – Whether to show figure.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Name of file/path to save the figure to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plotting.dataframes.html" class="btn btn-neutral float-right" title="plotting.dataframes module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plotting.base.html" class="btn btn-neutral float-left" title="plotting.base module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Michael Rossol
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

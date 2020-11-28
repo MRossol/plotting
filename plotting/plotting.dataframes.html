@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>plotting.dataframes module &mdash; plotting 0.0.7 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotting.lines module" href="plotting.lines.html" />
+    <link rel="prev" title="plotting.colormaps module" href="plotting.colormaps.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> plotting
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../misc/misc.html">Installation and Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/installation.html#development">Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">plotting</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="plotting.html">plotting package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="plotting.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="plotting.base.html">plotting.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotting.colormaps.html">plotting.colormaps module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">plotting.dataframes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotting.lines.html">plotting.lines module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotting.version.html">plotting.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">plotting</a> &raquo;</li>
+        
+          <li><a href="plotting.html">plotting package</a> &raquo;</li>
+        
+      <li>plotting.dataframes module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/mrossol/plotting/blob/master/docs/source/plotting/plotting.dataframes.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-plotting.dataframes">
+<span id="plotting-dataframes-module"></span><h1>plotting.dataframes module<a class="headerlink" href="#module-plotting.dataframes" title="Permalink to this headline">¶</a></h1>
+<p>Plotting dataframe data with seaborn and pandas</p>
+<dl class="py function">
+<dt id="plotting.dataframes.pivot_timeseries">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">pivot_timeseries</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">var_name</span></em>, <em class="sig-param"><span class="n">timezone</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#pivot_timeseries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.pivot_timeseries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pivot timeseries DataFrame and shift UTC by given timezone offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Timeseries DataFrame to be pivoted with year, month, hour columns</p></li>
+<li><p><strong>var_name</strong> (<em>str</em>) – Name for new column describing data</p></li>
+<li><p><strong>timezone</strong> (<em>int, optional</em>) – UTC offset to apply to DatetimeIndex, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>pandas.DataFrame</em> – Seaborn style long table with source, year, month, hour columns</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.pivot_df">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">pivot_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">var_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#pivot_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.pivot_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pivot DataFrame converting columns to source and data to var_name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Source DataFrame to convert to Seaborn long style</p></li>
+<li><p><strong>var_name</strong> (<em>str</em>) – Column name to use for data in final DataFrame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>pandas.DataFrame</em> – Seaborn long style DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.box_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">box_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#box_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.box_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Box plot based on seaborns boxplot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Seaborn compliant (long style) DataFrame</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for seaborn.boxplot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.boxplot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.dist_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">dist_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">fit</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#dist_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.dist_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distribution plot based on seaborn distplot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame | pandas.Series</em>) – Seaborn compliant (long style) DataFrame</p></li>
+<li><p><strong>fit</strong> (<em>bool</em>) – Fit the distribution</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for seaborn.distplot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.distplot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.point_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">point_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#point_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.point_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Point / line plot based on seaborn pointplot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Seaborn compliant (long style) DataFrame</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for seaborn.pointplot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.pointplot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.bar_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">bar_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'bar'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#bar_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.bar_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bar plot based on seaborn’s catplot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Seaborn compliant (long style) DataFrame</p></li>
+<li><p><strong>kind</strong> (<em>str</em>) – kind of plot to use “count” or “bar”</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for seaborn.barplot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.catplot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.barplot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.countplot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.df_bar_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">df_bar_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#df_bar_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.df_bar_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bar plot based on pandas bar plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – DataFrame to plot</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for pandas.DataFrame.plot</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.plot</span></code></p>
+<dl class="simple">
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.stackedbar_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">stackedbar_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">stack</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#stackedbar_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.stackedbar_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bar plot based on seaborn’s catplot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Seaborn compliant (long style) DataFrame</p></li>
+<li><p><strong>x</strong> (<em>str</em>) – Column to use for x-axis</p></li>
+<li><p><strong>y</strong> (<em>str</em>) – Column to use for y-axis</p></li>
+<li><p><strong>stack</strong> (<em>str</em>) – Column to stack</p></li>
+<li><p><strong>order</strong> (<em>list</em>) – Stacking order</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for pandas.DataFrame.plot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.plot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.df_scatter">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">df_scatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#df_scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.df_scatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>scatter plot based on pandas.plot.scatter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Seaborn compliant (long style) DataFrame</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for pandas.DataFrame.plot.scatter and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.plot.scatter</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.df_line_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">df_line_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#df_line_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.df_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>point / line plot based on pandas plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – DataFrame of data to plot</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for pandas.DataFrame.plot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.plot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.df_error_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">df_error_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">error</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#df_error_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.df_error_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>point / line plot with error bars based on pandas plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – DataFrame of data to plot</p></li>
+<li><p><strong>error</strong> (<em>pandas.DataFrame</em>) – Error values for data values</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for pandas.DataFrame.plot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.plot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotting.dataframes.df_pie_plot">
+<code class="sig-prename descclassname">plotting.dataframes.</code><code class="sig-name descname">df_pie_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plotting/dataframes.html#df_pie_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#plotting.dataframes.df_pie_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pie chart using pandas plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – DataFrame of data to plot</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – kwargs for pandas.DataFrame.plot and plotting_base</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.plot</span></code></dt><dd><p>plotting function</p>
+</dd>
+<dt><a class="reference internal" href="plotting.base.html#plotting.base.plotting_base" title="plotting.base.plotting_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotting.base.plotting_base</span></code></a></dt><dd><p>plotting base</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plotting.lines.html" class="btn btn-neutral float-right" title="plotting.lines module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plotting.colormaps.html" class="btn btn-neutral float-left" title="plotting.colormaps module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Michael Rossol
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

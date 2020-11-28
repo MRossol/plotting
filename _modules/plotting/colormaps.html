@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>plotting.colormaps &mdash; plotting 0.0.7 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> plotting
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/misc.html">Installation and Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../misc/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../misc/installation.html#development">Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting/modules.html">plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plotting/plotting.html">plotting package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plotting/plotting.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../plotting/plotting.base.html">plotting.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../plotting/plotting.colormaps.html">plotting.colormaps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../plotting/plotting.dataframes.html">plotting.dataframes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../plotting/plotting.lines.html">plotting.lines module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../plotting/plotting.version.html">plotting.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">plotting</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../plotting.html">plotting</a> &raquo;</li>
+        
+      <li>plotting.colormaps</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for plotting.colormaps</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Plotting of 3D arrays in 2D plots</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">plotting.base</span> <span class="kn">import</span> <span class="n">plotting_base</span>
+
+
+<div class="viewcode-block" id="heatmap_plot"><a class="viewcode-back" href="../../plotting/plotting.colormaps.html#plotting.colormaps.heatmap_plot">[docs]</a><span class="k">def</span> <span class="nf">heatmap_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Heat map plot using seaborn heatmap</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : ndarray | pandas.DataFrame</span>
+<span class="sd">        ndarray of heatmap values or</span>
+<span class="sd">        pandas DataFrame of heat map values with tick labels as index</span>
+<span class="sd">        and column labels</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        kwargs for seaborn.heatmap and plotting_base</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    seaborn.heatmap : plotting function</span>
+
+<span class="sd">    plotting.base.plotting_base : plotting base</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">plot_func</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">plotting_base</span><span class="p">(</span><span class="n">plot_func</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="add_colorbar"><a class="viewcode-back" href="../../plotting/plotting.colormaps.html#plotting.colormaps.add_colorbar">[docs]</a><span class="k">def</span> <span class="nf">add_colorbar</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">cf</span><span class="p">,</span> <span class="n">ticks</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span>
+                 <span class="n">location</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a colorbar legend to given axis</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    axis : matplotlib.axis</span>
+<span class="sd">        Axis objet to add colorbar to</span>
+<span class="sd">    cf : matplotlib.cm.ScalarMappable</span>
+<span class="sd">        Contour set or colormap mappable to use for colors</span>
+<span class="sd">    ticks : list</span>
+<span class="sd">        list of tick values</span>
+<span class="sd">    size : tuple</span>
+<span class="sd">        colorbar size</span>
+<span class="sd">    padding : float</span>
+<span class="sd">        how much to pad around the colorbar</span>
+<span class="sd">    location : str, optional</span>
+<span class="sd">        Location of colorbar, by default &#39;right&#39;</span>
+<span class="sd">    label : str, optional</span>
+<span class="sd">        Label for colorbar, by default None</span>
+<span class="sd">    lines : list, optional</span>
+<span class="sd">        list of lines to add, by default None</span>
+<span class="sd">    fontsize : int, optional</span>
+<span class="sd">        fontsize for label</span>
+<span class="sd">        tick size = fontsize -2</span>
+<span class="sd">        by default 14</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">divider</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+
+    <span class="n">caxis</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                <span class="n">pad</span><span class="o">=</span><span class="n">padding</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">location</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+        <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span>
+
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="n">ticks</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">caxis</span><span class="p">,</span>
+                        <span class="n">orientation</span><span class="o">=</span><span class="n">orientation</span><span class="p">,</span>
+                        <span class="n">ticklocation</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+
+    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">fontsize</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">lines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">add_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="contour_plot"><a class="viewcode-back" href="../../plotting/plotting.colormaps.html#plotting.colormaps.contour_plot">[docs]</a><span class="k">def</span> <span class="nf">contour_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a contoured colormap from data shape = (n, 3)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : ndarray</span>
+<span class="sd">        n X 3 array of data to plot of form (x, y, c)</span>
+<span class="sd">    figsize : tuple, optional</span>
+<span class="sd">        Figure size, by default (8, 6)</span>
+<span class="sd">    fontsize : int, optional</span>
+<span class="sd">        Labels font size, by default 14</span>
+<span class="sd">    zlim : float, optional</span>
+<span class="sd">        z / c limit, by default None</span>
+<span class="sd">    major_spacing : float, optional</span>
+<span class="sd">        space between major contours, by default None</span>
+<span class="sd">    minor_spacing : float, optional</span>
+<span class="sd">        space between minor contours, by default None</span>
+<span class="sd">    contour_width : int, optional</span>
+<span class="sd">        contour line width, by default 1</span>
+<span class="sd">    contour_color : str, optional</span>
+<span class="sd">        contour line color, by default &#39;k&#39;</span>
+<span class="sd">    opacity : float, optional</span>
+<span class="sd">        opacity of colormap, by default 1.</span>
+<span class="sd">    colorbar : bool, optional</span>
+<span class="sd">        Display color bar, by default True</span>
+<span class="sd">    colorbar_location : str, optional</span>
+<span class="sd">        Location of colorbar, by default &#39;right&#39;</span>
+<span class="sd">    colorbar_label : str, optional</span>
+<span class="sd">        Colorbar label, by default None</span>
+<span class="sd">    colorbar_lines : bool, optional</span>
+<span class="sd">        Plot lines on colorbar, by default True</span>
+<span class="sd">    colorbar_ticks : int, optional</span>
+<span class="sd">       Number of colorbar ticks, by default None</span>
+<span class="sd">    colormap : str, optional</span>
+<span class="sd">        colormap style, by default &#39;jet&#39;</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        kwargs for plotting_base</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    matplotlib.pyplot.contour : plotting function</span>
+<span class="sd">    matplotlib.pyplot.countourf : plotting function</span>
+
+<span class="sd">    plotting.base.plotting_base : plotting base</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">plot_func</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">zlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">major_spacing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">minor_spacing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">contour_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                  <span class="n">contour_color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">colorbar_location</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">colorbar_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">colorbar_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">colorbar_ticks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">):</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Data must be of shape (x, y, c)&#39;</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">z_m</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="n">a_ratio</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">a_ratio</span> <span class="o">=</span> <span class="n">a_ratio</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">a_ratio</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">figsize</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">figsize</span> <span class="o">=</span> <span class="p">[</span><span class="n">figsize</span> <span class="o">*</span> <span class="n">a_ratio</span><span class="p">,</span> <span class="n">figsize</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">figsize</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span>
+            <span class="n">figsize</span> <span class="o">=</span> <span class="p">[</span><span class="n">figsize</span> <span class="o">*</span> <span class="n">a_ratio</span><span class="p">,</span> <span class="n">figsize</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">zlim</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="n">zlim</span>
+
+        <span class="k">if</span> <span class="n">major_spacing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">major_spacing</span> <span class="o">=</span> <span class="p">(</span><span class="n">zmax</span> <span class="o">-</span> <span class="n">zmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+        <span class="k">if</span> <span class="n">minor_spacing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">minor_spacing</span> <span class="o">=</span> <span class="n">major_spacing</span> <span class="o">/</span> <span class="mi">10</span>
+
+        <span class="n">cl_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">+</span> <span class="n">major_spacing</span><span class="p">,</span> <span class="n">major_spacing</span><span class="p">)</span>
+        <span class="n">cf_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">+</span> <span class="n">minor_spacing</span><span class="p">,</span> <span class="n">minor_spacing</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">colorbar_ticks</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">l_levels</span> <span class="o">=</span> <span class="n">cl_levels</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">l_levels</span> <span class="o">=</span> <span class="p">(</span><span class="n">zmax</span> <span class="o">-</span> <span class="n">zmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">colorbar_ticks</span>
+            <span class="n">l_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">+</span> <span class="n">l_levels</span><span class="p">,</span> <span class="n">l_levels</span><span class="p">)</span>
+
+        <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span>
+        <span class="k">if</span> <span class="n">colorbar_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+            <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span>
+
+        <span class="n">cf</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z_m</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">cf_levels</span><span class="p">,</span>
+                          <span class="n">extend</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">contour_color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">cl_levels</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="n">contour_color</span><span class="p">,),</span>
+                             <span class="n">linewidths</span><span class="o">=</span><span class="p">(</span><span class="n">contour_width</span><span class="p">,))</span>
+
+        <span class="k">if</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cf</span><span class="o">.</span><span class="n">set_cmap</span><span class="p">(</span><span class="n">colormap</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
+            <span class="n">cbar_padding</span> <span class="o">=</span> <span class="mf">0.1</span>
+            <span class="k">if</span> <span class="n">colorbar_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+                <span class="n">figsize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">figsize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span>
+                <span class="n">cbar_size</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">20</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">figsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">figsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span>
+                <span class="n">cbar_size</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">20</span>
+
+            <span class="n">divider</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+
+            <span class="n">caxis</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="n">colorbar_location</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">cbar_size</span><span class="p">,</span>
+                                        <span class="n">pad</span><span class="o">=</span><span class="n">cbar_padding</span><span class="p">)</span>
+
+            <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="n">l_levels</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">caxis</span><span class="p">,</span>
+                                <span class="n">orientation</span><span class="o">=</span><span class="n">orientation</span><span class="p">,</span>
+                                <span class="n">ticklocation</span><span class="o">=</span><span class="n">colorbar_location</span><span class="p">)</span>
+
+            <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">fontsize</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">colorbar_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">colorbar_label</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">colorbar_lines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">contour_color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cbar</span><span class="o">.</span><span class="n">add_lines</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span>
+
+    <span class="n">plotting_base</span><span class="p">(</span><span class="n">plot_func</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="colorbar"><a class="viewcode-back" href="../../plotting/plotting.colormaps.html#plotting.colormaps.colorbar">[docs]</a><span class="k">def</span> <span class="nf">colorbar</span><span class="p">(</span><span class="n">zlim</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+             <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s1">&#39;neither&#39;</span><span class="p">,</span> <span class="n">ticklocation</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>
+             <span class="n">fontsize_other</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fontsize_label</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+             <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">showfig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create colorbar</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    zlim : tuple</span>
+<span class="sd">        List or tuple indicating zmin and zmax.</span>
+<span class="sd">    tick : int</span>
+<span class="sd">        Number of ticks to label.</span>
+<span class="sd">    lines : int</span>
+<span class="sd">        Number of lines to draw on colorbar.</span>
+<span class="sd">    line_color : str</span>
+<span class="sd">        Color of lines drawn on colorbar.</span>
+<span class="sd">    linewidth : int</span>
+<span class="sd">        Line width for each line drawn on colorbar.</span>
+<span class="sd">    colormap : str</span>
+<span class="sd">        Color scheme for colorbar.</span>
+<span class="sd">    extend : str</span>
+<span class="sd">        Direction to extend colors beyond zmin and zmax.</span>
+<span class="sd">    ticklocation : str</span>
+<span class="sd">        Orientation of colorbar and location of tick marks.</span>
+<span class="sd">    fontsize_other : int</span>
+<span class="sd">        Font size of tick numbers.</span>
+<span class="sd">    label : str</span>
+<span class="sd">        Label for colorbar</span>
+<span class="sd">    fontsize_label : int</span>
+<span class="sd">        Font size of label.</span>
+<span class="sd">    figsize : tuple</span>
+<span class="sd">        Width and height of figure</span>
+<span class="sd">    dpi : int</span>
+<span class="sd">        DPI resolution of figure.</span>
+<span class="sd">    showfig : bool</span>
+<span class="sd">        Whether to show figure.</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Name of file/path to save the figure to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">a_ratio</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">figsize</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ticklocation</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">]:</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="n">figsize</span> <span class="o">/</span> <span class="n">a_ratio</span><span class="p">,</span> <span class="n">figsize</span><span class="p">)</span>
+        <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="n">figsize</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">/</span> <span class="n">a_ratio</span><span class="p">)</span>
+        <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span>
+
+    <span class="k">if</span> <span class="n">ticks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ticks</span> <span class="o">=</span> <span class="p">(</span><span class="n">zlim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">zlim</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">ticks</span>
+        <span class="n">ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zlim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ticks</span><span class="p">,</span> <span class="n">ticks</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">zlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="n">zlim</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">cb</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">ColorbarBase</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
+                                   <span class="n">orientation</span><span class="o">=</span><span class="n">orientation</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="n">extend</span><span class="p">,</span>
+                                   <span class="n">ticks</span><span class="o">=</span><span class="n">ticks</span><span class="p">,</span> <span class="n">ticklocation</span><span class="o">=</span><span class="n">ticklocation</span><span class="p">)</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">fontsize_other</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">fontsize_label</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">lines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="n">zlim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">zlim</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">lines</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zlim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lines</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">add_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="n">line_color</span><span class="p">,)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">),</span>
+                     <span class="n">linewidths</span><span class="o">=</span><span class="p">(</span><span class="n">linewidth</span><span class="p">,)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">showfig</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Michael Rossol
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
