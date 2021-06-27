@@ -16,7 +16,7 @@ pip install ghp-import
 ## Refreshing the API Documentation
 
 - Make sure reV is in your PYTHONPATH
-- Run `sphinx-apidoc -eM -o source/plotting ../plotting` from the `docs` folder.
+- Run `sphinx-apidoc -eMT -o source/plotting ../plotting` from the `docs` folder.
 - `git push` changes to the documentation source code as needed.
 - Make the documentation per below
 

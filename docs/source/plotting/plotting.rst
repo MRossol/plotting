@@ -14,5 +14,5 @@ Submodules
    plotting.base
    plotting.colormaps
    plotting.dataframes
-   plotting.lines
+   plotting.points
    plotting.version

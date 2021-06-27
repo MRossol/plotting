@@ -15,8 +15,14 @@ plotting is wrapper on `matplotlib <https://matplotlib.org/index.html>`_ and `se
    :maxdepth: 3
    :caption: Contents:
 
-   misc/misc
-   plotting/modules
+   installation
+
+.. autosummary::
+   :toctree: _plotting
+   :template: custom-module-template.rst
+   :recursive:
+
+   plotting
 
 Indices and tables
 ==================
