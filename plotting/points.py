@@ -132,7 +132,7 @@ def get_line_styles(colors=None, linestyles=None, markers=None):
     return colors, linestyles, markers
 
 
-def line_plot(*lines, legend=None, **kwargs):
+def line_plot(*lines, **kwargs):
     """
     Point / line plot
 
@@ -140,8 +140,6 @@ def line_plot(*lines, legend=None, **kwargs):
     ----------
     lines : ndarray, shape(line) = (n,2)
         each line in lines must be a nx2 array or nx2 list
-    legend : list
-        Legend values to plot
     colors : str | list, optional
         color or list of colors to use for lines, by default None
     linestyles : str | list, optional
@@ -198,10 +196,10 @@ def line_plot(*lines, legend=None, **kwargs):
                       mec=mec, mew=mew, color=next(colors), alpha=next(alpha),
                       linestyle=next(linestyles), linewidth=linewidth)
 
-    plotting_base(plot_func, *lines, legend=legend, **kwargs)
+    plotting_base(plot_func, *lines, **kwargs)
 
 
-def error_plot(data_error, legend=None, **kwargs):
+def error_plot(data_error, **kwargs):
     """
     Line plot with error bars
 
@@ -209,8 +207,6 @@ def error_plot(data_error, legend=None, **kwargs):
     ----------
     data_error : ndarray, shape(data[i]) = (n,2)
         Either a tuple or list of nx2 arrays or a single nx2 array.
-    legend : list
-        Legend values to plot
     colors : str | list, optional
         color or list of colors to use for lines, by default None
     linestyles : str | list, optional
@@ -267,7 +263,7 @@ def error_plot(data_error, legend=None, **kwargs):
                           linestyle=next(linestyles), mec=mec, mew=mew,
                           capsize=capsize, capthick=linewidth)
 
-    plotting_base(plot_func, data_error, legend=legend, **kwargs)
+    plotting_base(plot_func, data_error, **kwargs)
 
 
 def dual_plot(data1, data2,
