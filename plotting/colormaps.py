@@ -32,7 +32,7 @@ def heatmap_plot(data, **kwargs):
     def plot_func(axis, data, **kwargs):
         sns.heatmap(data, ax=axis, **kwargs)
 
-    plotting_base(plot_func, data, legend=None, **kwargs)
+    plotting_base(plot_func, data, **kwargs)
 
 
 def add_colorbar(axis, cf, ticks, size, padding,
